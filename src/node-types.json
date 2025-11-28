@@ -35,11 +35,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
         {
           "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -75,6 +83,14 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -88,6 +104,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop",
           "named": true
         }
       ]
@@ -110,11 +130,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
         {
           "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -150,6 +178,14 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -164,6 +200,10 @@
         {
           "type": "unary_expression",
           "named": true
+        },
+        {
+          "type": "while_loop",
+          "named": true
         }
       ]
     }
@@ -172,6 +212,101 @@
     "type": "boolean",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "break",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
+          "named": true
+        },
+        {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
+          "type": "expr_identifier",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "call",
@@ -236,11 +371,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
         {
           "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -276,6 +419,14 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -289,6 +440,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop",
           "named": true
         }
       ]
@@ -347,11 +502,19 @@
             "named": true
           },
           {
+            "type": "break",
+            "named": true
+          },
+          {
             "type": "call",
             "named": true
           },
           {
             "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "continue",
             "named": true
           },
           {
@@ -387,6 +550,14 @@
             "named": true
           },
           {
+            "type": "loop",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -400,6 +571,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "while_loop",
             "named": true
           }
         ]
@@ -427,11 +602,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
         {
           "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -467,7 +650,15 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
           "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "return",
           "named": true
         },
         {
@@ -484,6 +675,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop",
           "named": true
         }
       ]
@@ -506,11 +701,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
         {
           "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -546,6 +749,14 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -559,6 +770,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop",
           "named": true
         }
       ]
@@ -759,11 +974,19 @@
             "named": true
           },
           {
+            "type": "break",
+            "named": true
+          },
+          {
             "type": "call",
             "named": true
           },
           {
             "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "continue",
             "named": true
           },
           {
@@ -799,6 +1022,14 @@
             "named": true
           },
           {
+            "type": "loop",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -812,6 +1043,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "while_loop",
             "named": true
           }
         ]
@@ -891,11 +1126,19 @@
             "named": true
           },
           {
+            "type": "break",
+            "named": true
+          },
+          {
             "type": "call",
             "named": true
           },
           {
             "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "continue",
             "named": true
           },
           {
@@ -931,6 +1174,14 @@
             "named": true
           },
           {
+            "type": "loop",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -944,6 +1195,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "while_loop",
             "named": true
           }
         ]
@@ -967,11 +1222,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
         {
           "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -1007,6 +1270,14 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -1020,6 +1291,25 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "loop",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "block",
           "named": true
         }
       ]
@@ -1126,11 +1416,19 @@
             "named": true
           },
           {
+            "type": "break",
+            "named": true
+          },
+          {
             "type": "call",
             "named": true
           },
           {
             "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "continue",
             "named": true
           },
           {
@@ -1166,6 +1464,14 @@
             "named": true
           },
           {
+            "type": "loop",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -1179,6 +1485,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "while_loop",
             "named": true
           }
         ]
@@ -1215,6 +1525,101 @@
     "type": "record_fields",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "return",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
+          "named": true
+        },
+        {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
+          "type": "expr_identifier",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "source_file",
@@ -1292,11 +1697,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
         {
           "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -1332,6 +1745,14 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -1345,6 +1766,10 @@
         },
         {
           "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop",
           "named": true
         }
       ]
@@ -1397,11 +1822,19 @@
             "named": true
           },
           {
+            "type": "break",
+            "named": true
+          },
+          {
             "type": "call",
             "named": true
           },
           {
             "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "continue",
             "named": true
           },
           {
@@ -1437,6 +1870,14 @@
             "named": true
           },
           {
+            "type": "loop",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -1450,6 +1891,10 @@
           },
           {
             "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "while_loop",
             "named": true
           }
         ]
@@ -1488,11 +1933,19 @@
           "named": true
         },
         {
+          "type": "break",
+          "named": true
+        },
+        {
           "type": "call",
           "named": true
         },
         {
           "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
           "named": true
         },
         {
@@ -1528,6 +1981,14 @@
           "named": true
         },
         {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -1542,6 +2003,10 @@
         {
           "type": "unary_expression",
           "named": true
+        },
+        {
+          "type": "while_loop",
+          "named": true
         }
       ]
     }
@@ -1550,6 +2015,112 @@
     "type": "where_clause",
     "named": true,
     "fields": {}
+  },
+  {
+    "type": "while_loop",
+    "named": true,
+    "fields": {
+      "predicate": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "enum_ctor",
+            "named": true
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "hash_map",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "let",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "loop",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_ctor",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "while_loop",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "block",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "!",
@@ -1648,6 +2219,14 @@
     "named": false
   },
   {
+    "type": "break",
+    "named": false
+  },
+  {
+    "type": "continue",
+    "named": true
+  },
+  {
     "type": "else",
     "named": false
   },
@@ -1688,6 +2267,14 @@
     "named": false
   },
   {
+    "type": "loop",
+    "named": false
+  },
+  {
+    "type": "return",
+    "named": false
+  },
+  {
     "type": "self",
     "named": false
   },
@@ -1713,6 +2300,10 @@
   },
   {
     "type": "where",
+    "named": false
+  },
+  {
+    "type": "while",
     "named": false
   },
   {

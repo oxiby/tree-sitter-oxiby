@@ -38,7 +38,7 @@
 ; Keywords
 
 [
-  ; "break"
+  "break"
   ; "continue"
   "else"
   ; "enum"
@@ -49,10 +49,10 @@
   "in"
   ; "is"
   "let"
-  ; "loop"
+  "loop"
   ; "match"
   ; "pub"
-  ; "return"
+  "return"
   ; "self"
   ; "Self"
   "struct"
@@ -60,8 +60,10 @@
   ; "type"
   "use"
   "where"
-  ; "while"
+  "while"
 ] @keyword
+
+(continue) @keyword
 
 ; Literals
 

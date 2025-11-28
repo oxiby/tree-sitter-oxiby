@@ -159,8 +159,13 @@ module.exports = grammar({
       $.call,
 
       // Control flow
+      $.break,
       $.conditional,
+      $.continue,
       $.for_loop,
+      $.loop,
+      $.return,
+      $.while_loop,
 
       // Patterns
       $.let,
@@ -281,6 +286,11 @@ module.exports = grammar({
       field("value", $._expression),
     ),
 
+    break: $ => prec.left(seq(
+      "break",
+      optional($._expression),
+    )),
+
     conditional: $ => seq(
       "if",
       $._expression,
@@ -295,12 +305,29 @@ module.exports = grammar({
         ),
       ),
     ),
+    continue: _ => "continue",
 
     for_loop: $ => seq(
       "for",
       $.pattern,
       "in",
       $._expression,
+      $.block,
+    ),
+
+    loop: $ => seq(
+      "loop",
+      $.block,
+    ),
+
+    return: $ => prec.left(seq(
+      "return",
+      optional($._expression),
+    )),
+
+    while_loop: $ => seq(
+      "while",
+      field("predicate", $._expression),
       $.block,
     ),
 
@@ -373,7 +400,7 @@ module.exports = grammar({
 
     binary_expression: $ => prec.left(2, seq(
       $._expression,
-      choice("+", "-", "*", "/", "==", "!=", "<", "<=", ">", ">=", "."),
+      choice("+", "-", "*", "/", "==", "!=", "<", "<=", ">", ">=", ".", "="),
       $._expression,
     )),
   }
