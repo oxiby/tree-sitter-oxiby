@@ -11,8 +11,8 @@
 
 "(" @punctuation.bracket
 ")" @punctuation.bracket
-; "[" @punctuation.bracket
-; "]" @punctuation.bracket
+"[" @punctuation.bracket
+"]" @punctuation.bracket
 "{" @punctuation.bracket
 "}" @punctuation.bracket
 
@@ -43,10 +43,10 @@
   "else"
   ; "enum"
   "fn"
-  ; "for"
+  "for"
   "if"
   ; "impl"
-  ; "in"
+  "in"
   ; "is"
   "let"
   ; "loop"
@@ -58,7 +58,7 @@
   "struct"
   ; "trait"
   ; "type"
-  ; "use"
+  "use"
   "where"
   ; "while"
 ] @keyword
@@ -101,3 +101,13 @@
 (keyword_params
   keyword_param_indicator: ":" @variable.parameter
   parameter_name: (expr_identifier) @variable.parameter)
+
+; Imports
+
+(item_use
+  (
+    (expr_identifier)
+    ("." (expr_identifier))*
+  ) @module
+  import: [(expr_identifier) @function (type_identifier) @type]
+  "->"? @keyword)

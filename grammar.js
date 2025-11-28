@@ -37,7 +37,7 @@ module.exports = grammar({
       // $.item_impl,
       $.item_struct,
       // $.item_trait,
-      // $.item_use,
+      $.item_use,
     ),
 
     // item_enum: $ => seq(
@@ -81,6 +81,33 @@ module.exports = grammar({
       ),
     ),
 
+    // item_trait: $ => "TODO",
+
+    item_use: $ => seq(
+      "use",
+      field("module", sepBy1(".", $.expr_identifier)),
+      field("import", sepBy1(",",
+        seq(
+          choice(
+            $.expr_identifier,
+            seq(
+              $.type_identifier,
+              optional(seq(".", $.type_identifier)),
+            ),
+          ),
+          field("rename", optional(
+            seq(
+              "->",
+              choice(
+                $.expr_identifier,
+                $.type_identifier,
+              ),
+            ),
+          )),
+        ),
+      )),
+    ),
+
     type_params: $ => seq(
       "<",
       sepBy1(",", $.expr_identifier),
@@ -98,12 +125,9 @@ module.exports = grammar({
 
     record_fields: _ => "TODO",
 
-    // item_trait: $ => "TODO",
-    // item_use: $ => "TODO",
-
     visibility: _ => "pub",
 
-    type_identifier: _ => /[A-Z][A-Za-z]*/,
+    type_identifier: _ => /[A-Z][0-9A-Za-z]*/,
 
     where_clause: _ => seq(
       "where",
@@ -111,19 +135,37 @@ module.exports = grammar({
     ),
 
     _expression: $ => choice(
+      // Literals
       $.boolean,
       $.float,
       $.integer,
       $.string,
 
+      // Compound primitives
+      $.hash_map,
+      $.list,
+      $.tuple,
+
+      // Data structures
+      $.struct_ctor,
+      $.enum_ctor,
+
+      // Identifiers
       $.expr_identifier,
 
+      // Member access
+
+      // Calls
       $.call,
-      $.let,
+
+      // Control flow
       $.conditional,
+      $.for_loop,
 
-      $.struct_ctor,
+      // Patterns
+      $.let,
 
+      // Misc.
       $.unary_expression,
       $.binary_expression,
     ),
@@ -139,7 +181,34 @@ module.exports = grammar({
 
     string: _ => seq('"', /[^"]*/, '"'),
 
-    expr_identifier: _ => /[a-z_][A-Za-z_]*/,
+    hash_map: $ => seq(
+      "[",
+        sepBy1(",",
+          seq(
+            $._expression,
+            ":",
+            $._expression,
+          ),
+        ),
+        optional(","),
+      "]",
+    ),
+
+    list: $ => seq(
+      "[",
+      sepBy(",", $._expression),
+      "]",
+    ),
+
+    tuple: $ => seq(
+      "(",
+        $._expression,
+        ",",
+        sepBy(",", $._expression),
+      ")",
+    ),
+
+    expr_identifier: _ => /[a-z_][0-9A-Za-z_]*/,
 
     parameters: $ => seq(
       "(",
@@ -173,10 +242,11 @@ module.exports = grammar({
       ),
     ),
 
-    call: $ => seq(
+    call: $ => prec(2, seq(
+      optional(seq(field("type", $.type_identifier), ".")),
       field("name", $.expr_identifier),
       field("arguments", $.arguments),
-    ),
+    )),
 
     arguments: $ => seq(
       "(",
@@ -226,12 +296,69 @@ module.exports = grammar({
       ),
     ),
 
-    struct_ctor: $ => seq(
-      field("name", $.type_identifier),
+    for_loop: $ => seq(
+      "for",
+      $.pattern,
+      "in",
+      $._expression,
+      $.block,
+    ),
+
+    pattern: $ => choice(
+      "_",
+      $.pattern_literal,
+      $.expr_identifier,
+      $.pattern_tuple,
+    ),
+
+    pattern_literal: $ => choice(
+      $.boolean,
+      $.float,
+      $.integer,
+      $.string,
+    ),
+
+    pattern_tuple: $ => seq(
       "(",
-      sepBy1(",", $._expression),
+      $.pattern,
+      ",",
+      $.pattern,
+      optional(sepBy(",", $.pattern)),
       ")",
     ),
+
+    struct_ctor: $ => prec.left(seq(
+      field("name", $.type_identifier),
+      optional(choice(
+        $.field_struct_ctor,
+        $.tuple_struct_ctor,
+      )),
+    )),
+
+    field_struct_ctor: $ => seq(
+      "{",
+      sepBy1(",",
+        seq(
+          field("name", $.expr_identifier),
+          ":",
+          field("value", $._expression),
+        )
+      ),
+      optional(","),
+      "}",
+    ),
+
+    tuple_struct_ctor: $ => seq(
+      "(",
+      sepBy1(",", field("value", $._expression)),
+      ")",
+    ),
+
+    enum_ctor: $ => prec(2, seq(
+      field("type", $.type_identifier),
+      ".",
+      field("variant", $.struct_ctor),
+    )),
 
     block: $ => seq(
       "{",

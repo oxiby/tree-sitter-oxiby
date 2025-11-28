@@ -43,11 +43,23 @@
           "named": true
         },
         {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
           "type": "expr_identifier",
           "named": true
         },
         {
           "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
           "named": true
         },
         {
@@ -59,11 +71,19 @@
           "named": true
         },
         {
+          "type": "list",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
         {
           "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
           "named": true
         },
         {
@@ -98,11 +118,23 @@
           "named": true
         },
         {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
           "type": "expr_identifier",
           "named": true
         },
         {
           "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
           "named": true
         },
         {
@@ -114,11 +146,19 @@
           "named": true
         },
         {
+          "type": "list",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
         {
           "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
           "named": true
         },
         {
@@ -153,6 +193,16 @@
         "types": [
           {
             "type": "expr_identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_identifier",
             "named": true
           }
         ]
@@ -194,11 +244,23 @@
           "named": true
         },
         {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
           "type": "expr_identifier",
           "named": true
         },
         {
           "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
           "named": true
         },
         {
@@ -210,11 +272,289 @@
           "named": true
         },
         {
+          "type": "list",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
         {
           "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "enum_ctor",
+    "named": true,
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "variant": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "struct_ctor",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "field_struct_ctor",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "expr_identifier",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "enum_ctor",
+            "named": true
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "hash_map",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "let",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_ctor",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "for_loop",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "block",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
+          "type": "expr_identifier",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "hash_map",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
+          "type": "expr_identifier",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
           "named": true
         },
         {
@@ -339,6 +679,70 @@
     }
   },
   {
+    "type": "item_use",
+    "named": true,
+    "fields": {
+      "import": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "->",
+            "named": false
+          },
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "module": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          }
+        ]
+      },
+      "rename": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "->",
+            "named": false
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "keyword_args",
     "named": true,
     "fields": {
@@ -363,11 +767,23 @@
             "named": true
           },
           {
+            "type": "enum_ctor",
+            "named": true
+          },
+          {
             "type": "expr_identifier",
             "named": true
           },
           {
             "type": "float",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "hash_map",
             "named": true
           },
           {
@@ -379,11 +795,19 @@
             "named": true
           },
           {
+            "type": "list",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
           {
             "type": "struct_ctor",
+            "named": true
+          },
+          {
+            "type": "tuple",
             "named": true
           },
           {
@@ -475,11 +899,23 @@
             "named": true
           },
           {
+            "type": "enum_ctor",
+            "named": true
+          },
+          {
             "type": "expr_identifier",
             "named": true
           },
           {
             "type": "float",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "hash_map",
             "named": true
           },
           {
@@ -491,6 +927,10 @@
             "named": true
           },
           {
+            "type": "list",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
@@ -499,11 +939,90 @@
             "named": true
           },
           {
+            "type": "tuple",
+            "named": true
+          },
+          {
             "type": "unary_expression",
             "named": true
           }
         ]
       }
+    }
+  },
+  {
+    "type": "list",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
+          "type": "expr_identifier",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -520,6 +1039,71 @@
         },
         {
           "type": "positional_params",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "expr_identifier",
+          "named": true
+        },
+        {
+          "type": "pattern_literal",
+          "named": true
+        },
+        {
+          "type": "pattern_tuple",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern_literal",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern_tuple",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "pattern",
           "named": true
         }
       ]
@@ -550,11 +1134,23 @@
             "named": true
           },
           {
+            "type": "enum_ctor",
+            "named": true
+          },
+          {
             "type": "expr_identifier",
             "named": true
           },
           {
             "type": "float",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "hash_map",
             "named": true
           },
           {
@@ -566,11 +1162,19 @@
             "named": true
           },
           {
+            "type": "list",
+            "named": true
+          },
+          {
             "type": "string",
             "named": true
           },
           {
             "type": "struct_ctor",
+            "named": true
+          },
+          {
+            "type": "tuple",
             "named": true
           },
           {
@@ -628,6 +1232,10 @@
         {
           "type": "item_struct",
           "named": true
+        },
+        {
+          "type": "item_use",
+          "named": true
         }
       ]
     }
@@ -653,6 +1261,25 @@
       }
     },
     "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "field_struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple_struct_ctor",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "tuple",
+    "named": true,
+    "fields": {},
+    "children": {
       "multiple": true,
       "required": true,
       "types": [
@@ -673,11 +1300,23 @@
           "named": true
         },
         {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
           "type": "expr_identifier",
           "named": true
         },
         {
           "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
           "named": true
         },
         {
@@ -689,11 +1328,19 @@
           "named": true
         },
         {
+          "type": "list",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
         {
           "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
           "named": true
         },
         {
@@ -731,6 +1378,82 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "tuple_struct_ctor",
+    "named": true,
+    "fields": {
+      "value": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "enum_ctor",
+            "named": true
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "hash_map",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "let",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_ctor",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -773,11 +1496,23 @@
           "named": true
         },
         {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
           "type": "expr_identifier",
           "named": true
         },
         {
           "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
           "named": true
         },
         {
@@ -789,11 +1524,19 @@
           "named": true
         },
         {
+          "type": "list",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
         {
           "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
           "named": true
         },
         {
@@ -893,6 +1636,18 @@
     "named": false
   },
   {
+    "type": "[",
+    "named": false
+  },
+  {
+    "type": "]",
+    "named": false
+  },
+  {
+    "type": "_",
+    "named": false
+  },
+  {
     "type": "else",
     "named": false
   },
@@ -913,7 +1668,15 @@
     "named": false
   },
   {
+    "type": "for",
+    "named": false
+  },
+  {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "in",
     "named": false
   },
   {
@@ -939,6 +1702,10 @@
   {
     "type": "type_identifier",
     "named": true
+  },
+  {
+    "type": "use",
+    "named": false
   },
   {
     "type": "visibility",
