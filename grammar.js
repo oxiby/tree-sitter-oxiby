@@ -74,11 +74,11 @@ module.exports = grammar({
       optional($.visibility),
       "struct",
       field("name", $.type_identifier),
-      field("type_params", optional($.type_params)),
-      choice(
-        $.tuple_fields,
+      optional(field("type_params", $.type_params)),
+      optional(choice(
         $.record_fields,
-      ),
+        $.tuple_fields,
+      )),
     ),
 
     // item_trait: $ => "TODO",
@@ -114,6 +114,20 @@ module.exports = grammar({
       ">",
     ),
 
+    record_fields: $ => seq(
+      "{",
+      sepBy(",",
+        seq(
+          optional($.visibility),
+          field("name", $.expr_identifier),
+          ":",
+          field("type", choice($.type_identifier, $.expr_identifier)),
+        ),
+      ),
+      optional(","),
+      "}",
+    ),
+
     tuple_fields: $ => seq(
       "(",
       sepBy(",", seq(
@@ -122,8 +136,6 @@ module.exports = grammar({
       )),
       ")",
     ),
-
-    record_fields: _ => "TODO",
 
     visibility: _ => "pub",
 
