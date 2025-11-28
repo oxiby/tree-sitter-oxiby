@@ -85,6 +85,10 @@
 (keyword_args
   name: (expr_identifier) @variable.parameter)
 
+(binary_expression
+  operator: "."
+  right: (_) @variable.member)
+
 ; Let bindings
 
 (let

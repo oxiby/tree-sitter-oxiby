@@ -399,9 +399,9 @@ module.exports = grammar({
     )),
 
     binary_expression: $ => prec.left(2, seq(
-      $._expression,
-      choice("+", "-", "*", "/", "==", "!=", "<", "<=", ">", ">=", ".", "="),
-      $._expression,
+      field("left", $._expression),
+      field("operator", choice("+", "-", "*", "/", "==", "!=", "<", "<=", ">", ">=", ".", "=")),
+      field("right", $._expression),
     )),
   }
 });
