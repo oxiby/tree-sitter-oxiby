@@ -53,13 +53,10 @@
   "if"
   "impl"
   "in"
-  ; "is"
   "let"
   "loop"
-  ; "match"
+  "match"
   "return"
-  ; "self"
-  ; "Self"
   "struct"
   "trait"
   "type"
@@ -95,10 +92,12 @@
   operator: "."
   right: (_) @variable.member)
 
-; Let bindings
+; Bindings
 
-(let
-  name: (expr_identifier) @variable)
+(pattern (expr_identifier) @variable)
+(pattern_type (expr_identifier) @variable)
+(pattern_ctor
+  idents: (expr_identifier) @variable)
 
 ; Items
 

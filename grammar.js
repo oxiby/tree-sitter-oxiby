@@ -26,7 +26,7 @@ const record_fields = ($, allowPub = false) => {
     sepBy(",",
       seq(...body),
     ),
-    ",",
+    optional(","),
     "}",
   );
 };
@@ -43,6 +43,7 @@ const tuple_fields = ($, allowPub) => {
   return seq(
     "(",
     sepBy(",", seq(...body)),
+    optional(","),
     ")",
   );
 };
@@ -256,6 +257,7 @@ module.exports = grammar({
 
       // Patterns
       $.let,
+      $.match,
 
       // Misc.
       $.unary_expression,
@@ -289,6 +291,7 @@ module.exports = grammar({
     list: $ => seq(
       "[",
       sepBy(",", $._expression),
+      optional(","),
       "]",
     ),
 
@@ -368,9 +371,24 @@ module.exports = grammar({
 
     let: $ => seq(
       "let",
-      field("name", $.expr_identifier),
+      field("pattern", $.pattern),
       "=",
       field("value", $._expression),
+    ),
+
+    match: $ => seq(
+      "match",
+      field("expr", $._expression),
+      "{",
+      field("arms", sepBy1(",", $.match_arm)),
+      optional(","),
+      "}",
+    ),
+
+    match_arm: $ => seq(
+      $.pattern,
+      "->",
+      $._expression,
     ),
 
     break: $ => prec.left(seq(
@@ -419,10 +437,12 @@ module.exports = grammar({
     ),
 
     pattern: $ => choice(
-      "_",
       $.pattern_literal,
+      $.pattern_type,
       $.expr_identifier,
       $.pattern_tuple,
+      $.pattern_ctor,
+      "_",
     ),
 
     pattern_literal: $ => choice(
@@ -432,6 +452,12 @@ module.exports = grammar({
       $.string,
     ),
 
+    pattern_type: $ => seq(
+      $.expr_identifier,
+      ":",
+      $.type_identifier,
+    ),
+
     pattern_tuple: $ => seq(
       "(",
       $.pattern,
@@ -439,6 +465,16 @@ module.exports = grammar({
       $.pattern,
       optional(sepBy(",", $.pattern)),
       ")",
+    ),
+
+    pattern_ctor: $ => prec.left(seq(
+      optional(field("parent_type", seq($.type_identifier, "."))),
+      field("type", $.type_identifier),
+      optional(field("idents", choice(
+        seq("(", "_", ")"),
+        seq("(", sepBy(",", $.expr_identifier), ")"),
+        seq("{", sepBy(",", $.expr_identifier), "}"),
+      )))),
     ),
 
     struct_ctor: $ => prec.left(seq(

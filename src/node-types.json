@@ -117,6 +117,10 @@
             "named": true
           },
           {
+            "type": "match",
+            "named": true
+          },
+          {
             "type": "return",
             "named": true
           },
@@ -261,6 +265,10 @@
             "named": true
           },
           {
+            "type": "match",
+            "named": true
+          },
+          {
             "type": "return",
             "named": true
           },
@@ -354,6 +362,10 @@
         },
         {
           "type": "loop",
+          "named": true
+        },
+        {
+          "type": "match",
           "named": true
         },
         {
@@ -469,6 +481,10 @@
         },
         {
           "type": "loop",
+          "named": true
+        },
+        {
+          "type": "match",
           "named": true
         },
         {
@@ -610,6 +626,10 @@
         },
         {
           "type": "loop",
+          "named": true
+        },
+        {
+          "type": "match",
           "named": true
         },
         {
@@ -804,6 +824,10 @@
             "named": true
           },
           {
+            "type": "match",
+            "named": true
+          },
+          {
             "type": "return",
             "named": true
           },
@@ -968,6 +992,10 @@
           "named": true
         },
         {
+          "type": "match",
+          "named": true
+        },
+        {
           "type": "pattern",
           "named": true
         },
@@ -1064,6 +1092,10 @@
         },
         {
           "type": "loop",
+          "named": true
+        },
+        {
+          "type": "match",
           "named": true
         },
         {
@@ -1490,6 +1522,10 @@
             "named": true
           },
           {
+            "type": "match",
+            "named": true
+          },
+          {
             "type": "return",
             "named": true
           },
@@ -1571,12 +1607,12 @@
     "type": "let",
     "named": true,
     "fields": {
-      "name": {
+      "pattern": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "expr_identifier",
+            "type": "pattern",
             "named": true
           }
         ]
@@ -1643,6 +1679,10 @@
           },
           {
             "type": "loop",
+            "named": true
+          },
+          {
+            "type": "match",
             "named": true
           },
           {
@@ -1742,6 +1782,10 @@
           "named": true
         },
         {
+          "type": "match",
+          "named": true
+        },
+        {
           "type": "return",
           "named": true
         },
@@ -1784,6 +1828,223 @@
     }
   },
   {
+    "type": "match",
+    "named": true,
+    "fields": {
+      "arms": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "match_arm",
+            "named": true
+          }
+        ]
+      },
+      "expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "enum_ctor",
+            "named": true
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "hash_map",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "let",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "loop",
+            "named": true
+          },
+          {
+            "type": "match",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_ctor",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "while_loop",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "match_arm",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "binary_expression",
+          "named": true
+        },
+        {
+          "type": "boolean",
+          "named": true
+        },
+        {
+          "type": "break",
+          "named": true
+        },
+        {
+          "type": "call",
+          "named": true
+        },
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "continue",
+          "named": true
+        },
+        {
+          "type": "enum_ctor",
+          "named": true
+        },
+        {
+          "type": "expr_identifier",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "for_loop",
+          "named": true
+        },
+        {
+          "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "let",
+          "named": true
+        },
+        {
+          "type": "list",
+          "named": true
+        },
+        {
+          "type": "loop",
+          "named": true
+        },
+        {
+          "type": "match",
+          "named": true
+        },
+        {
+          "type": "pattern",
+          "named": true
+        },
+        {
+          "type": "return",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "struct_ctor",
+          "named": true
+        },
+        {
+          "type": "tuple",
+          "named": true
+        },
+        {
+          "type": "unary_expression",
+          "named": true
+        },
+        {
+          "type": "while_loop",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameters",
     "named": true,
     "fields": {},
@@ -1815,14 +2076,86 @@
           "named": true
         },
         {
+          "type": "pattern_ctor",
+          "named": true
+        },
+        {
           "type": "pattern_literal",
           "named": true
         },
         {
           "type": "pattern_tuple",
           "named": true
+        },
+        {
+          "type": "pattern_type",
+          "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "pattern_ctor",
+    "named": true,
+    "fields": {
+      "idents": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "(",
+            "named": false
+          },
+          {
+            "type": ")",
+            "named": false
+          },
+          {
+            "type": ",",
+            "named": false
+          },
+          {
+            "type": "_",
+            "named": false
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "{",
+            "named": false
+          },
+          {
+            "type": "}",
+            "named": false
+          }
+        ]
+      },
+      "parent_type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1862,6 +2195,25 @@
       "types": [
         {
           "type": "pattern",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "pattern_type",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expr_identifier",
+          "named": true
+        },
+        {
+          "type": "type_identifier",
           "named": true
         }
       ]
@@ -1933,6 +2285,10 @@
           },
           {
             "type": "loop",
+            "named": true
+          },
+          {
+            "type": "match",
             "named": true
           },
           {
@@ -2059,6 +2415,10 @@
         },
         {
           "type": "loop",
+          "named": true
+        },
+        {
+          "type": "match",
           "named": true
         },
         {
@@ -2268,6 +2628,10 @@
           "named": true
         },
         {
+          "type": "match",
+          "named": true
+        },
+        {
           "type": "return",
           "named": true
         },
@@ -2360,6 +2724,10 @@
           },
           {
             "type": "loop",
+            "named": true
+          },
+          {
+            "type": "match",
             "named": true
           },
           {
@@ -2471,6 +2839,10 @@
         },
         {
           "type": "loop",
+          "named": true
+        },
+        {
+          "type": "match",
           "named": true
         },
         {
@@ -2607,6 +2979,10 @@
           },
           {
             "type": "loop",
+            "named": true
+          },
+          {
+            "type": "match",
             "named": true
           },
           {
@@ -2797,6 +3173,10 @@
   },
   {
     "type": "loop",
+    "named": false
+  },
+  {
+    "type": "match",
     "named": false
   },
   {
