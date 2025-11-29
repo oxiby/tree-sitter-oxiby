@@ -106,12 +106,17 @@
 (fn_signature
   name: (expr_identifier) @function)
 
+(fn_signature
+  return_type: (expr_identifier) @type)
+
 (positional_params
-  parameter_name: (expr_identifier) @variable.parameter)
+  parameter_name: (expr_identifier) @variable.parameter
+  parameter_type: (_) @type)
 
 (keyword_params
   keyword_param_indicator: ":" @variable.parameter
-  parameter_name: (expr_identifier) @variable.parameter)
+  parameter_name: (expr_identifier) @variable.parameter
+  parameter_type: (_) @type)
 
 ; Imports
 

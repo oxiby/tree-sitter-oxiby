@@ -99,7 +99,10 @@ module.exports = grammar({
         optional(
           seq(
             "->",
-            seq(optional(seq($.type_identifier, ".")), $.type_identifier),
+            choice(
+              $.expr_identifier,
+              seq(optional(seq($.type_identifier, ".")), $.type_identifier),
+            ),
           ),
         ),
       ),
@@ -262,6 +265,7 @@ module.exports = grammar({
       // Misc.
       $.unary_expression,
       $.binary_expression,
+      $.parenthesized,
     ),
 
     boolean: _ => choice(
@@ -324,7 +328,10 @@ module.exports = grammar({
       seq(
         field("parameter_name", $.expr_identifier),
         ":",
-        field("parameter_type", seq(optional(seq($.type_identifier, ".")), $.type_identifier)),
+        field("parameter_type", choice(
+          $.expr_identifier,
+          seq(optional(seq($.type_identifier, ".")), $.type_identifier)),
+        ),
       ),
     ),
 
@@ -333,7 +340,10 @@ module.exports = grammar({
         field("keyword_param_indicator", ":"),
         field("parameter_name", $.expr_identifier),
         ":",
-        field("parameter_type", seq(optional(seq($.type_identifier, ".")), $.type_identifier)),
+        field("parameter_type", choice(
+          $.expr_identifier,
+          seq(optional(seq($.type_identifier, ".")), $.type_identifier)),
+        ),
       ),
     ),
 
@@ -526,5 +536,7 @@ module.exports = grammar({
       field("operator", choice("+", "-", "*", "/", "==", "!=", "<", "<=", ">", ">=", ".", "=")),
       field("right", $._expression),
     )),
+
+    parenthesized: $ => seq("(", $._expression, ")"),
   }
 });
