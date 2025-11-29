@@ -621,6 +621,36 @@
     }
   },
   {
+    "type": "enum_fields",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expr_identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "field_struct_ctor",
     "named": true,
     "fields": {
@@ -925,6 +955,52 @@
     }
   },
   {
+    "type": "item_enum",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "type_params": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_params",
+            "named": true
+          }
+        ]
+      },
+      "variant": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "variant",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "visibility",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "item_fn",
     "named": true,
     "fields": {
@@ -998,6 +1074,16 @@
     "type": "item_struct",
     "named": true,
     "fields": {
+      "fields": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "struct_fields",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1020,17 +1106,9 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
-        {
-          "type": "record_fields",
-          "named": true
-        },
-        {
-          "type": "tuple_fields",
-          "named": true
-        },
         {
           "type": "visibility",
           "named": true
@@ -1667,46 +1745,6 @@
     }
   },
   {
-    "type": "record_fields",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "expr_identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "expr_identifier",
-            "named": true
-          },
-          {
-            "type": "type_identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "visibility",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "return",
     "named": true,
     "fields": {},
@@ -1811,6 +1849,10 @@
       "required": false,
       "types": [
         {
+          "type": "item_enum",
+          "named": true
+        },
+        {
           "type": "item_fn",
           "named": true
         },
@@ -1855,6 +1897,46 @@
         },
         {
           "type": "tuple_struct_ctor",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "struct_fields",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expr_identifier",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "visibility",
           "named": true
         }
       ]
@@ -1950,36 +2032,6 @@
         },
         {
           "type": "while_loop",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "tuple_fields",
-    "named": true,
-    "fields": {
-      "type": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "expr_identifier",
-            "named": true
-          },
-          {
-            "type": "type_identifier",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "visibility",
           "named": true
         }
       ]
@@ -2189,6 +2241,32 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "variant",
+    "named": true,
+    "fields": {
+      "fields": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "enum_fields",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -2408,6 +2486,10 @@
   },
   {
     "type": "else",
+    "named": false
+  },
+  {
+    "type": "enum",
     "named": false
   },
   {

@@ -10,6 +10,43 @@
 const sepBy1 = (sep, rule) => seq(rule, repeat(seq(sep, rule)));
 const sepBy = (sep, rule) => optional(sepBy1(sep, rule));
 
+const record_fields = ($, allowPub = false) => {
+  const body = [
+    field("name", $.expr_identifier),
+    ":",
+    field("type", choice($.type_identifier, $.expr_identifier)),
+  ];
+
+  if (allowPub) {
+    body.unshift(optional($.visibility));
+  }
+
+  return seq(
+    "{",
+    sepBy(",",
+      seq(...body),
+    ),
+    ",",
+    "}",
+  );
+};
+
+const tuple_fields = ($, allowPub) => {
+  const body = [
+    field("type", choice($.type_identifier, $.expr_identifier))
+  ];
+
+  if (allowPub) {
+    body.unshift(optional($.visibility));
+  }
+
+  return seq(
+    "(",
+    sepBy(",", seq(...body)),
+    ")",
+  );
+};
+
 module.exports = grammar({
   name: "oxiby",
 
@@ -32,7 +69,7 @@ module.exports = grammar({
     ),
 
     _item: $ => choice(
-      // $.item_enum,
+      $.item_enum,
       $.item_fn,
       // $.item_impl,
       $.item_struct,
@@ -40,12 +77,16 @@ module.exports = grammar({
       $.item_use,
     ),
 
-    // item_enum: $ => seq(
-    //   optional($.visibility),
-    //   "enum",
-    //   $.type,
-    //   optional($.where_clause),
-    // ),
+    item_enum: $ => seq(
+      optional($.visibility),
+      "enum",
+      field("name", $.type_identifier),
+      optional(field("type_params", $.type_params)),
+      "{",
+      sepBy(",", field("variant", $.variant)),
+      optional(","),
+      "}"
+    ),
 
     item_fn: $ => seq(
       field("visibility", optional($.visibility)),
@@ -75,11 +116,34 @@ module.exports = grammar({
       "struct",
       field("name", $.type_identifier),
       optional(field("type_params", $.type_params)),
-      optional(choice(
-        $.record_fields,
-        $.tuple_fields,
-      )),
+      optional(field("fields", $.struct_fields)),
     ),
+
+    variant: $ => seq(
+      field("name", $.type_identifier),
+      field("fields", optional($.enum_fields))
+    ),
+
+    type_params: $ => seq(
+      "<",
+      sepBy1(",", $.expr_identifier),
+      ">",
+    ),
+
+    struct_fields: $ => choice(
+      $._struct_record_fields,
+      $._struct_tuple_fields,
+    ),
+
+    enum_fields: $ => choice(
+      $._enum_record_fields,
+      $._enum_tuple_fields,
+    ),
+
+    _struct_record_fields: $ => record_fields($, true),
+    _struct_tuple_fields: $ => tuple_fields($, true),
+    _enum_record_fields: $ => record_fields($),
+    _enum_tuple_fields: $ => tuple_fields($),
 
     // item_trait: $ => "TODO",
 
@@ -106,35 +170,6 @@ module.exports = grammar({
           )),
         ),
       )),
-    ),
-
-    type_params: $ => seq(
-      "<",
-      sepBy1(",", $.expr_identifier),
-      ">",
-    ),
-
-    record_fields: $ => seq(
-      "{",
-      sepBy(",",
-        seq(
-          optional($.visibility),
-          field("name", $.expr_identifier),
-          ":",
-          field("type", choice($.type_identifier, $.expr_identifier)),
-        ),
-      ),
-      optional(","),
-      "}",
-    ),
-
-    tuple_fields: $ => seq(
-      "(",
-      sepBy(",", seq(
-        optional($.visibility),
-        field("type", choice($.type_identifier, $.expr_identifier)),
-      )),
-      ")",
     ),
 
     visibility: _ => "pub",
