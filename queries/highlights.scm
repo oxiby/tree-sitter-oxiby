@@ -70,8 +70,8 @@
   ; "self"
   ; "Self"
   "struct"
-  ; "trait"
-  ; "type"
+  "trait"
+  "type"
   "use"
   "where"
   "while"
@@ -113,7 +113,7 @@
 
 ; Functions
 
-(item_fn
+(fn_signature
   name: (expr_identifier) @function)
 
 (positional_params

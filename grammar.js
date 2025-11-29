@@ -73,7 +73,7 @@ module.exports = grammar({
       $.item_fn,
       // $.item_impl,
       $.item_struct,
-      // $.item_trait,
+      $.item_trait,
       $.item_use,
     ),
 
@@ -88,7 +88,7 @@ module.exports = grammar({
       "}"
     ),
 
-    item_fn: $ => seq(
+    fn_signature: $ => seq(
       field("visibility", optional($.visibility)),
       "fn",
       field("name", $.expr_identifier),
@@ -98,15 +98,16 @@ module.exports = grammar({
         optional(
           seq(
             "->",
-            $.type_identifier,
+            seq(optional(seq($.type_identifier, ".")), $.type_identifier),
           ),
         ),
       ),
       field("where_clause", optional($.where_clause)),
-      field(
-        "body",
-        $.block,
-      ),
+    ),
+
+    item_fn: $ => seq(
+      field("signature", $.fn_signature),
+      field("body", $.block),
     ),
 
     // item_impl: $ => "TODO",
@@ -145,7 +146,37 @@ module.exports = grammar({
     _enum_record_fields: $ => record_fields($),
     _enum_tuple_fields: $ => tuple_fields($),
 
-    // item_trait: $ => "TODO",
+    item_trait: $ => seq(
+      optional($.visibility),
+      "trait",
+      field("name", $.type_identifier),
+      optional(field("type_params", $.type_params)),
+      optional(field("where_clause", $.where_clause)),
+      "{",
+      optional(field("associated_types", repeat1($.associated_type))),
+      optional(field("functions", repeat1(choice($.item_fn, $.fn_signature)))),
+      "}",
+    ),
+
+    where_clause: $ => seq(
+      "where",
+      sepBy1(",", $.constraint),
+      optional(","),
+    ),
+
+    constraint: $ => seq(
+      field("type", choice($.type_identifier, $.expr_identifier)),
+      ":",
+      field("bounds", $.bounds),
+    ),
+
+    bounds: $ => sepBy1("+", $.type_identifier),
+
+    associated_type: $ => seq(
+      "type",
+      field("name", $.type_identifier),
+      optional(field("default", seq("=", $.type_identifier))),
+    ),
 
     item_use: $ => seq(
       "use",
@@ -175,11 +206,6 @@ module.exports = grammar({
     visibility: _ => "pub",
 
     type_identifier: _ => /[A-Z][0-9A-Za-z]*/,
-
-    where_clause: _ => seq(
-      "where",
-      "TODO",
-    ),
 
     _expression: $ => choice(
       // Literals
@@ -281,7 +307,7 @@ module.exports = grammar({
       seq(
         field("parameter_name", $.expr_identifier),
         ":",
-        field("parameter_type", $.type_identifier),
+        field("parameter_type", seq(optional(seq($.type_identifier, ".")), $.type_identifier)),
       ),
     ),
 
@@ -290,7 +316,7 @@ module.exports = grammar({
         field("keyword_param_indicator", ":"),
         field("parameter_name", $.expr_identifier),
         ":",
-        field("parameter_type", $.type_identifier),
+        field("parameter_type", seq(optional(seq($.type_identifier, ".")), $.type_identifier)),
       ),
     ),
 

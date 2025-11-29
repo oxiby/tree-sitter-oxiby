@@ -19,6 +19,36 @@
     }
   },
   {
+    "type": "associated_type",
+    "named": true,
+    "fields": {
+      "default": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "=",
+            "named": false
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "binary_expression",
     "named": true,
     "fields": {
@@ -359,6 +389,21 @@
     "fields": {}
   },
   {
+    "type": "bounds",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "type_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "break",
     "named": true,
     "fields": {},
@@ -595,6 +640,36 @@
     }
   },
   {
+    "type": "constraint",
+    "named": true,
+    "fields": {
+      "bounds": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "bounds",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "enum_ctor",
     "named": true,
     "fields": {
@@ -750,6 +825,70 @@
           },
           {
             "type": "while_loop",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
+    "type": "fn_signature",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "expr_identifier",
+            "named": true
+          }
+        ]
+      },
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "parameters",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "->",
+            "named": false
+          },
+          {
+            "type": ".",
+            "named": false
+          },
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "visibility": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "visibility",
+            "named": true
+          }
+        ]
+      },
+      "where_clause": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "where_clause",
             "named": true
           }
         ]
@@ -1014,56 +1153,12 @@
           }
         ]
       },
-      "name": {
+      "signature": {
         "multiple": false,
         "required": true,
         "types": [
           {
-            "type": "expr_identifier",
-            "named": true
-          }
-        ]
-      },
-      "parameters": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "parameters",
-            "named": true
-          }
-        ]
-      },
-      "return_type": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "->",
-            "named": false
-          },
-          {
-            "type": "type_identifier",
-            "named": true
-          }
-        ]
-      },
-      "visibility": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "visibility",
-            "named": true
-          }
-        ]
-      },
-      "where_clause": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "where_clause",
+            "type": "fn_signature",
             "named": true
           }
         ]
@@ -1100,6 +1195,76 @@
         "types": [
           {
             "type": "type_params",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "visibility",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "item_trait",
+    "named": true,
+    "fields": {
+      "associated_types": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "associated_type",
+            "named": true
+          }
+        ]
+      },
+      "functions": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "fn_signature",
+            "named": true
+          },
+          {
+            "type": "item_fn",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "type_params": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_params",
+            "named": true
+          }
+        ]
+      },
+      "where_clause": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "where_clause",
             "named": true
           }
         ]
@@ -1314,6 +1479,10 @@
         "multiple": true,
         "required": true,
         "types": [
+          {
+            "type": ".",
+            "named": false
+          },
           {
             "type": "type_identifier",
             "named": true
@@ -1737,6 +1906,10 @@
         "required": true,
         "types": [
           {
+            "type": ".",
+            "named": false
+          },
+          {
             "type": "type_identifier",
             "named": true
           }
@@ -1858,6 +2031,10 @@
         },
         {
           "type": "item_struct",
+          "named": true
+        },
+        {
+          "type": "item_trait",
           "named": true
         },
         {
@@ -2272,7 +2449,17 @@
   {
     "type": "where_clause",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "constraint",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "while_loop",
@@ -2461,10 +2648,6 @@
     "named": false
   },
   {
-    "type": "TODO",
-    "named": false
-  },
-  {
     "type": "[",
     "named": false
   },
@@ -2545,7 +2728,15 @@
     "named": false
   },
   {
+    "type": "trait",
+    "named": false
+  },
+  {
     "type": "true",
+    "named": false
+  },
+  {
+    "type": "type",
     "named": false
   },
   {
