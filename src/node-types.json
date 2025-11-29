@@ -1166,6 +1166,82 @@
     }
   },
   {
+    "type": "item_impl",
+    "named": true,
+    "fields": {
+      "associated_types": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "associated_type",
+            "named": true
+          }
+        ]
+      },
+      "functions": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "item_fn",
+            "named": true
+          }
+        ]
+      },
+      "trait_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "trait_params": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_params",
+            "named": true
+          }
+        ]
+      },
+      "type_name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      },
+      "type_params": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_params",
+            "named": true
+          }
+        ]
+      },
+      "where_clause": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "where_clause",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "item_struct",
     "named": true,
     "fields": {
@@ -2030,6 +2106,10 @@
           "named": true
         },
         {
+          "type": "item_impl",
+          "named": true
+        },
+        {
           "type": "item_struct",
           "named": true
         },
@@ -2697,6 +2777,10 @@
   },
   {
     "type": "if",
+    "named": false
+  },
+  {
+    "type": "impl",
     "named": false
   },
   {

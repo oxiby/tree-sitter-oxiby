@@ -39,17 +39,8 @@
 (enum_fields
   type: (_) @type)
 
-; ([(struct_record_fields) (enum_record_fields)]
-;   name: (expr_identifier) @variable.parameter
-;   type: (_) @type)
-
-; (tuple_fields
-;   "(" @punctuation.bracket
-;   type: [
-;     (type_identifier) @type
-;     (expr_identifier) @type
-;   ]
-;   ")" @punctuation.bracket)
+(field_struct_ctor
+  name: (expr_identifier) @variable.parameter)
 
 ; Keywords
 
@@ -60,7 +51,7 @@
   "fn"
   "for"
   "if"
-  ; "impl"
+  "impl"
   "in"
   ; "is"
   "let"

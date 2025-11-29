@@ -71,7 +71,7 @@ module.exports = grammar({
     _item: $ => choice(
       $.item_enum,
       $.item_fn,
-      // $.item_impl,
+      $.item_impl,
       $.item_struct,
       $.item_trait,
       $.item_use,
@@ -155,6 +155,20 @@ module.exports = grammar({
       "{",
       optional(field("associated_types", repeat1($.associated_type))),
       optional(field("functions", repeat1(choice($.item_fn, $.fn_signature)))),
+      "}",
+    ),
+
+    item_impl: $ => seq(
+      "impl",
+      field("trait_name", $.type_identifier),
+      optional(field("trait_params", $.type_params)),
+      "for",
+      field("type_name", $.type_identifier),
+      optional(field("type_params", $.type_params)),
+      optional(field("where_clause", $.where_clause)),
+      "{",
+      optional(field("associated_types", repeat1($.associated_type))),
+      optional(field("functions", $.item_fn)),
       "}",
     ),
 
