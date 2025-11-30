@@ -254,8 +254,8 @@ module.exports = grammar({
       $.tuple,
 
       // Data structures
-      $.struct_ctor,
-      $.enum_ctor,
+      $.struct_literal,
+      $.enum_literal,
 
       // Identifiers
       $.expr_identifier,
@@ -315,12 +315,17 @@ module.exports = grammar({
       "]",
     ),
 
-    tuple: $ => seq(
-      "(",
-        $._expression,
-        ",",
-        sepBy(",", $._expression),
-      ")",
+    tuple: $ => choice(
+      seq("(", ")"),
+      seq("(", $._expression, ",", ")"),
+      seq(
+        "(",
+          $._expression,
+          ",",
+          sepBy1(",", $._expression),
+          optional(","),
+        ")",
+      )
     ),
 
     expr_identifier: _ => /[a-z_][0-9A-Za-z_]*/,
@@ -501,15 +506,15 @@ module.exports = grammar({
       )))),
     ),
 
-    struct_ctor: $ => prec.left(seq(
+    struct_literal: $ => prec.left(seq(
       field("name", $.type_identifier),
       optional(choice(
-        $.field_struct_ctor,
-        $.tuple_struct_ctor,
+        $.field_struct_literal,
+        $.tuple_struct_literal,
       )),
     )),
 
-    field_struct_ctor: $ => seq(
+    field_struct_literal: $ => seq(
       "{",
       sepBy1(",",
         seq(
@@ -522,16 +527,17 @@ module.exports = grammar({
       "}",
     ),
 
-    tuple_struct_ctor: $ => seq(
+    tuple_struct_literal: $ => prec(2, seq(
       "(",
       sepBy1(",", field("value", $._expression)),
+      optional(","),
       ")",
-    ),
+    )),
 
-    enum_ctor: $ => prec(2, seq(
+    enum_literal: $ => prec(2, seq(
       field("type", $.type_identifier),
       ".",
-      field("variant", $.struct_ctor),
+      field("variant", $.struct_literal),
     )),
 
     block: $ => seq(

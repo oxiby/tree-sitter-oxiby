@@ -25,7 +25,7 @@
 (record_variant
   name: (_) @variable.parameter)
 
-(field_struct_ctor
+(field_struct_literal
   name: (expr_identifier) @variable.parameter)
 
 ; Keywords

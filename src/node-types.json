@@ -99,7 +99,7 @@
             "named": true
           },
           {
-            "type": "enum_ctor",
+            "type": "enum_literal",
             "named": true
           },
           {
@@ -151,7 +151,7 @@
             "named": true
           },
           {
-            "type": "struct_ctor",
+            "type": "struct_literal",
             "named": true
           },
           {
@@ -259,7 +259,7 @@
             "named": true
           },
           {
-            "type": "enum_ctor",
+            "type": "enum_literal",
             "named": true
           },
           {
@@ -311,7 +311,7 @@
             "named": true
           },
           {
-            "type": "struct_ctor",
+            "type": "struct_literal",
             "named": true
           },
           {
@@ -363,7 +363,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -415,7 +415,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -486,7 +486,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -538,7 +538,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -675,7 +675,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -727,7 +727,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -790,7 +790,7 @@
     }
   },
   {
-    "type": "enum_ctor",
+    "type": "enum_literal",
     "named": true,
     "fields": {
       "type": {
@@ -808,7 +808,7 @@
         "required": true,
         "types": [
           {
-            "type": "struct_ctor",
+            "type": "struct_literal",
             "named": true
           }
         ]
@@ -816,7 +816,7 @@
     }
   },
   {
-    "type": "field_struct_ctor",
+    "type": "field_struct_literal",
     "named": true,
     "fields": {
       "name": {
@@ -858,7 +858,7 @@
             "named": true
           },
           {
-            "type": "enum_ctor",
+            "type": "enum_literal",
             "named": true
           },
           {
@@ -910,7 +910,7 @@
             "named": true
           },
           {
-            "type": "struct_ctor",
+            "type": "struct_literal",
             "named": true
           },
           {
@@ -1016,7 +1016,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -1072,7 +1072,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -1157,7 +1157,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -1209,7 +1209,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -1572,7 +1572,7 @@
             "named": true
           },
           {
-            "type": "enum_ctor",
+            "type": "enum_literal",
             "named": true
           },
           {
@@ -1624,7 +1624,7 @@
             "named": true
           },
           {
-            "type": "struct_ctor",
+            "type": "struct_literal",
             "named": true
           },
           {
@@ -1732,7 +1732,7 @@
             "named": true
           },
           {
-            "type": "enum_ctor",
+            "type": "enum_literal",
             "named": true
           },
           {
@@ -1784,7 +1784,7 @@
             "named": true
           },
           {
-            "type": "struct_ctor",
+            "type": "struct_literal",
             "named": true
           },
           {
@@ -1836,7 +1836,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -1888,7 +1888,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -1968,7 +1968,7 @@
             "named": true
           },
           {
-            "type": "enum_ctor",
+            "type": "enum_literal",
             "named": true
           },
           {
@@ -2020,7 +2020,7 @@
             "named": true
           },
           {
-            "type": "struct_ctor",
+            "type": "struct_literal",
             "named": true
           },
           {
@@ -2072,7 +2072,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -2128,7 +2128,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -2198,7 +2198,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -2250,7 +2250,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -2457,7 +2457,7 @@
             "named": true
           },
           {
-            "type": "enum_ctor",
+            "type": "enum_literal",
             "named": true
           },
           {
@@ -2509,7 +2509,7 @@
             "named": true
           },
           {
-            "type": "struct_ctor",
+            "type": "struct_literal",
             "named": true
           },
           {
@@ -2649,7 +2649,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -2701,7 +2701,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -2761,7 +2761,7 @@
     "fields": {}
   },
   {
-    "type": "struct_ctor",
+    "type": "struct_literal",
     "named": true,
     "fields": {
       "name": {
@@ -2780,11 +2780,11 @@
       "required": false,
       "types": [
         {
-          "type": "field_struct_ctor",
+          "type": "field_struct_literal",
           "named": true
         },
         {
-          "type": "tuple_struct_ctor",
+          "type": "tuple_struct_literal",
           "named": true
         }
       ]
@@ -2796,7 +2796,7 @@
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "binary_expression",
@@ -2823,7 +2823,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -2875,7 +2875,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -2920,7 +2920,7 @@
     }
   },
   {
-    "type": "tuple_struct_ctor",
+    "type": "tuple_struct_literal",
     "named": true,
     "fields": {
       "value": {
@@ -2952,7 +2952,7 @@
             "named": true
           },
           {
-            "type": "enum_ctor",
+            "type": "enum_literal",
             "named": true
           },
           {
@@ -3004,7 +3004,7 @@
             "named": true
           },
           {
-            "type": "struct_ctor",
+            "type": "struct_literal",
             "named": true
           },
           {
@@ -3129,7 +3129,7 @@
           "named": true
         },
         {
-          "type": "enum_ctor",
+          "type": "enum_literal",
           "named": true
         },
         {
@@ -3181,7 +3181,7 @@
           "named": true
         },
         {
-          "type": "struct_ctor",
+          "type": "struct_literal",
           "named": true
         },
         {
@@ -3292,7 +3292,7 @@
             "named": true
           },
           {
-            "type": "enum_ctor",
+            "type": "enum_literal",
             "named": true
           },
           {
@@ -3344,7 +3344,7 @@
             "named": true
           },
           {
-            "type": "struct_ctor",
+            "type": "struct_literal",
             "named": true
           },
           {

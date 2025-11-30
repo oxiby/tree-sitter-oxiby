@@ -1787,11 +1787,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "struct_ctor"
+          "name": "struct_literal"
         },
         {
           "type": "SYMBOL",
-          "name": "enum_ctor"
+          "name": "enum_literal"
         },
         {
           "type": "SYMBOL",
@@ -2024,23 +2024,57 @@
       ]
     },
     "tuple": {
-      "type": "SEQ",
+      "type": "CHOICE",
       "members": [
         {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "SYMBOL",
-          "name": "_expression"
-        },
-        {
-          "type": "STRING",
-          "value": ","
-        },
-        {
-          "type": "CHOICE",
+          "type": "SEQ",
           "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            },
+            {
+              "type": "STRING",
+              "value": ","
+            },
+            {
+              "type": "STRING",
+              "value": ")"
+            }
+          ]
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "STRING",
+              "value": "("
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_expression"
+            },
+            {
+              "type": "STRING",
+              "value": ","
+            },
             {
               "type": "SEQ",
               "members": [
@@ -2067,13 +2101,22 @@
               ]
             },
             {
-              "type": "BLANK"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            },
+            {
+              "type": "STRING",
+              "value": ")"
             }
           ]
-        },
-        {
-          "type": "STRING",
-          "value": ")"
         }
       ]
     },
@@ -3078,7 +3121,7 @@
         ]
       }
     },
-    "struct_ctor": {
+    "struct_literal": {
       "type": "PREC_LEFT",
       "value": 0,
       "content": {
@@ -3100,11 +3143,11 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "field_struct_ctor"
+                    "name": "field_struct_literal"
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "tuple_struct_ctor"
+                    "name": "tuple_struct_literal"
                   }
                 ]
               },
@@ -3116,7 +3159,7 @@
         ]
       }
     },
-    "field_struct_ctor": {
+    "field_struct_literal": {
       "type": "SEQ",
       "members": [
         {
@@ -3208,53 +3251,69 @@
         }
       ]
     },
-    "tuple_struct_ctor": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "("
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "FIELD",
-              "name": "value",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_expression"
-              }
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SEQ",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": ","
-                  },
-                  {
-                    "type": "FIELD",
-                    "name": "value",
-                    "content": {
-                      "type": "SYMBOL",
-                      "name": "_expression"
+    "tuple_struct_literal": {
+      "type": "PREC",
+      "value": 2,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "("
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "FIELD",
+                "name": "value",
+                "content": {
+                  "type": "SYMBOL",
+                  "name": "_expression"
+                }
+              },
+              {
+                "type": "REPEAT",
+                "content": {
+                  "type": "SEQ",
+                  "members": [
+                    {
+                      "type": "STRING",
+                      "value": ","
+                    },
+                    {
+                      "type": "FIELD",
+                      "name": "value",
+                      "content": {
+                        "type": "SYMBOL",
+                        "name": "_expression"
+                      }
                     }
-                  }
-                ]
+                  ]
+                }
               }
-            }
-          ]
-        },
-        {
-          "type": "STRING",
-          "value": ")"
-        }
-      ]
+            ]
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          },
+          {
+            "type": "STRING",
+            "value": ")"
+          }
+        ]
+      }
     },
-    "enum_ctor": {
+    "enum_literal": {
       "type": "PREC",
       "value": 2,
       "content": {
@@ -3277,7 +3336,7 @@
             "name": "variant",
             "content": {
               "type": "SYMBOL",
-              "name": "struct_ctor"
+              "name": "struct_literal"
             }
           }
         ]
