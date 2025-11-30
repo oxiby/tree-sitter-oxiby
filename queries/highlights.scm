@@ -31,6 +31,7 @@
 ; Keywords
 
 [
+  "->"
   "break"
   "else"
   "enum"
@@ -110,5 +111,4 @@
     (expr_identifier)
     ("." (expr_identifier))*
   ) @module
-  import: [(expr_identifier) @function (type_identifier) @type]
-  "->"? @keyword)
+  import: [(expr_identifier) @function (type_identifier) @type])
