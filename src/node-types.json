@@ -91,6 +91,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "conditional",
             "named": true
           },
@@ -259,6 +263,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "conditional",
             "named": true
           },
@@ -364,6 +372,10 @@
         },
         {
           "type": "call",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -494,6 +506,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -613,6 +629,148 @@
     }
   },
   {
+    "type": "closure",
+    "named": true,
+    "fields": {
+      "body": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "closure",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "enum_literal",
+            "named": true
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "hash_map",
+            "named": true
+          },
+          {
+            "type": "index",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "let",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "loop",
+            "named": true
+          },
+          {
+            "type": "match",
+            "named": true
+          },
+          {
+            "type": "parenthesized",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_literal",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "while_loop",
+            "named": true
+          }
+        ]
+      },
+      "name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expr_identifier",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "comment",
     "named": true,
     "extra": true,
@@ -684,6 +842,10 @@
         },
         {
           "type": "call",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -874,6 +1036,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "conditional",
             "named": true
           },
@@ -1036,6 +1202,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -1181,6 +1351,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -1288,6 +1462,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "conditional",
             "named": true
           },
@@ -1387,6 +1565,10 @@
           },
           {
             "type": "call",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {
@@ -1810,6 +1992,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "conditional",
             "named": true
           },
@@ -1974,6 +2160,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "conditional",
             "named": true
           },
@@ -2079,6 +2269,10 @@
         },
         {
           "type": "call",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -2218,6 +2412,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "conditional",
             "named": true
           },
@@ -2323,6 +2521,10 @@
         },
         {
           "type": "call",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -2453,6 +2655,10 @@
         },
         {
           "type": "call",
+          "named": true
+        },
+        {
+          "type": "closure",
           "named": true
         },
         {
@@ -2719,6 +2925,10 @@
             "named": true
           },
           {
+            "type": "closure",
+            "named": true
+          },
+          {
             "type": "conditional",
             "named": true
           },
@@ -2915,6 +3125,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -3093,6 +3307,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -3223,6 +3441,10 @@
           },
           {
             "type": "call",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {
@@ -3407,6 +3629,10 @@
           "named": true
         },
         {
+          "type": "closure",
+          "named": true
+        },
+        {
           "type": "conditional",
           "named": true
         },
@@ -3571,6 +3797,10 @@
           },
           {
             "type": "call",
+            "named": true
+          },
+          {
+            "type": "closure",
             "named": true
           },
           {

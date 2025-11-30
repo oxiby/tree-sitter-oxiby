@@ -102,6 +102,9 @@
   keyword_param_indicator: ":" @variable.parameter
   parameter_name: (expr_identifier) @variable.parameter)
 
+(closure
+  name: (expr_identifier) @variable.parameter)
+
 "self" @variable.parameter.builtin
 
 ; Imports

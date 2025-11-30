@@ -265,6 +265,7 @@ module.exports = grammar({
 
       // Calls
       $.call,
+      $.closure,
 
       // Control flow
       $.break,
@@ -397,6 +398,26 @@ module.exports = grammar({
         ":",
         field("expr", $._expression),
       ),
+    ),
+
+    closure: $ => seq(
+      "fn",
+      "(",
+      sepBy(",",
+        seq(
+          field("name", $.expr_identifier),
+          optional(seq(":", field("type", $.type))),
+        ),
+      ),
+      optional(","),
+      ")",
+      optional(seq(
+        "->",
+        field("return_type", $.type),
+      )),
+      "{",
+      field("body", repeat($._expression)),
+      "}",
     ),
 
     let: $ => seq(
