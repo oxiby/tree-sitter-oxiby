@@ -10,44 +10,6 @@
 const sepBy1 = (sep, rule) => seq(rule, repeat(seq(sep, rule)));
 const sepBy = (sep, rule) => optional(sepBy1(sep, rule));
 
-const record_fields = ($, allowPub = false) => {
-  const body = [
-    field("name", $.expr_identifier),
-    ":",
-    field("type", choice($.type_identifier, $.expr_identifier)),
-  ];
-
-  if (allowPub) {
-    body.unshift(optional($.visibility));
-  }
-
-  return seq(
-    "{",
-    sepBy(",",
-      seq(...body),
-    ),
-    optional(","),
-    "}",
-  );
-};
-
-const tuple_fields = ($, allowPub) => {
-  const body = [
-    field("type", choice($.type_identifier, $.expr_identifier))
-  ];
-
-  if (allowPub) {
-    body.unshift(optional($.visibility));
-  }
-
-  return seq(
-    "(",
-    sepBy(",", seq(...body)),
-    optional(","),
-    ")",
-  );
-};
-
 module.exports = grammar({
   name: "oxiby",
 
@@ -79,34 +41,30 @@ module.exports = grammar({
     ),
 
     item_enum: $ => seq(
-      optional($.visibility),
+      optional("pub"),
       "enum",
       field("name", $.type_identifier),
       optional(field("type_params", $.type_params)),
       "{",
       sepBy(",", field("variant", $.variant)),
       optional(","),
+      optional(field("functions", repeat1($.item_fn))),
       "}"
     ),
 
     fn_signature: $ => seq(
-      field("visibility", optional($.visibility)),
+      optional("pub"),
       "fn",
       field("name", $.expr_identifier),
       field("parameters", $.parameters),
-      field(
+      optional(field(
         "return_type",
-        optional(
-          seq(
-            "->",
-            choice(
-              $.expr_identifier,
-              seq(optional(seq($.type_identifier, ".")), $.type_identifier),
-            ),
-          ),
+        seq(
+          "->",
+          $.type,
         ),
-      ),
-      field("where_clause", optional($.where_clause)),
+      )),
+      optional(field("where_clause", $.where_clause)),
     ),
 
     item_fn: $ => seq(
@@ -114,44 +72,74 @@ module.exports = grammar({
       field("body", $.block),
     ),
 
-    // item_impl: $ => "TODO",
-
-    item_struct: $ => seq(
-      optional($.visibility),
+    item_struct: $ => prec.left(seq(
+      optional("pub"),
       "struct",
       field("name", $.type_identifier),
       optional(field("type_params", $.type_params)),
-      optional(field("fields", $.struct_fields)),
+      optional(field("body", choice($.tuple_struct, $.record_struct))),
+    )),
+
+    tuple_struct: $ => seq(
+      "(",
+      sepBy(",",
+        seq(optional("pub"), field("type", $.type)),
+      ),
+      optional(","),
+      ")",
+      optional(seq("{", repeat1($.item_fn), "}")),
+    ),
+
+    record_struct: $ => seq(
+      "{",
+      sepBy(",",
+        seq(
+          optional("pub"),
+          field("name", $.expr_identifier),
+          ":",
+          field("type", $.type),
+        ),
+      ),
+      optional(","),
+      optional(field("functions", repeat1($.item_fn))),
+      "}",
     ),
 
     variant: $ => seq(
       field("name", $.type_identifier),
-      field("fields", optional($.enum_fields))
+      optional(field("fields", choice($.tuple_variant, $.record_variant)))
+    ),
+
+    tuple_variant: $ => seq(
+      "(",
+      sepBy(",",
+        field("type", $.type),
+      ),
+      optional(","),
+      ")",
+    ),
+
+    record_variant: $ => seq(
+      "{",
+      sepBy(",",
+        seq(
+          field("name", $.expr_identifier),
+          ":",
+          field("type", $.type),
+        ),
+      ),
+      optional(","),
+      "}",
     ),
 
     type_params: $ => seq(
       "<",
-      sepBy1(",", $.expr_identifier),
+      sepBy1(",", $.type),
       ">",
     ),
 
-    struct_fields: $ => choice(
-      $._struct_record_fields,
-      $._struct_tuple_fields,
-    ),
-
-    enum_fields: $ => choice(
-      $._enum_record_fields,
-      $._enum_tuple_fields,
-    ),
-
-    _struct_record_fields: $ => record_fields($, true),
-    _struct_tuple_fields: $ => tuple_fields($, true),
-    _enum_record_fields: $ => record_fields($),
-    _enum_tuple_fields: $ => tuple_fields($),
-
     item_trait: $ => seq(
-      optional($.visibility),
+      optional("pub"),
       "trait",
       field("name", $.type_identifier),
       optional(field("type_params", $.type_params)),
@@ -172,7 +160,7 @@ module.exports = grammar({
       optional(field("where_clause", $.where_clause)),
       "{",
       optional(field("associated_types", repeat1($.associated_type))),
-      optional(field("functions", $.item_fn)),
+      optional(field("functions", repeat1($.item_fn))),
       "}",
     ),
 
@@ -183,9 +171,9 @@ module.exports = grammar({
     ),
 
     constraint: $ => seq(
-      field("type", choice($.type_identifier, $.expr_identifier)),
-      ":",
-      field("bounds", $.bounds),
+      field("type", $.type),
+      optional(field("bounds", seq(":", $.bounds))),
+      optional(field("default", seq("=", $.type))),
     ),
 
     bounds: $ => sepBy1("+", $.type_identifier),
@@ -193,7 +181,8 @@ module.exports = grammar({
     associated_type: $ => seq(
       "type",
       field("name", $.type_identifier),
-      optional(field("default", seq("=", $.type_identifier))),
+      optional(field("bounds", seq(":", sepBy1(",", $.bounds)))),
+      optional(field("default", seq("=", $.type))),
     ),
 
     item_use: $ => seq(
@@ -221,9 +210,36 @@ module.exports = grammar({
       )),
     ),
 
-    visibility: _ => "pub",
-
     type_identifier: _ => /[A-Z][0-9A-Za-z]*/,
+
+    type: $ => choice(
+      $.variable_type,
+      $.tuple_type,
+      $.function_type,
+      $.concrete_type,
+    ),
+
+    variable_type: $ => $.expr_identifier,
+
+    tuple_type: $ => seq(
+      "(",
+      sepBy(",", $.type),
+      ")",
+    ),
+
+    function_type: $ => seq(
+      "Fn",
+      "(",
+      field("parameters", optional(sepBy(",", $.type))),
+      ")",
+      field("return_type", optional(seq("->", $.type))),
+    ),
+
+    concrete_type: $ => seq(
+      field("qualifier", optional(seq($.type_identifier, "."))),
+      field("type_name", $.type_identifier),
+      field("type_parameters", optional($.type_params)),
+    ),
 
     _expression: $ => choice(
       // Literals
@@ -311,7 +327,6 @@ module.exports = grammar({
 
     parameters: $ => seq(
       "(",
-      optional("self"),
       optional(choice(
         seq(
           $.positional_params,
@@ -324,13 +339,15 @@ module.exports = grammar({
       ")",
     ),
 
+    self: _ => "self",
+
     positional_params: $ => sepBy1(",",
-      seq(
-        field("parameter_name", $.expr_identifier),
-        ":",
-        field("parameter_type", choice(
-          $.expr_identifier,
-          seq(optional(seq($.type_identifier, ".")), $.type_identifier)),
+      choice(
+        "self",
+        seq(
+          field("parameter_name", $.expr_identifier),
+          ":",
+          field("parameter_type", $.type),
         ),
       ),
     ),
@@ -340,10 +357,7 @@ module.exports = grammar({
         field("keyword_param_indicator", ":"),
         field("parameter_name", $.expr_identifier),
         ":",
-        field("parameter_type", choice(
-          $.expr_identifier,
-          seq(optional(seq($.type_identifier, ".")), $.type_identifier)),
-        ),
+        field("parameter_type", $.type),
       ),
     ),
 
@@ -533,7 +547,7 @@ module.exports = grammar({
 
     binary_expression: $ => prec.left(2, seq(
       field("left", $._expression),
-      field("operator", choice("+", "-", "*", "/", "==", "!=", "<", "<=", ">", ">=", ".", "=")),
+      field("operator", choice("..=", "..<", "+", "-", "*", "/", "==", "!=", "<", "<=", ">", ">=", ".", "=")),
       field("right", $._expression),
     )),
 

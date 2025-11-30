@@ -19,25 +19,11 @@
 "." @punctuation.delimiter
 ":" @punctuation.delimiter
 
-(type_params
-  "<" @punctuation.bracket
-  [
-    (type_identifier) @type
-    (expr_identifier) @type
-  ]
-  ">" @punctuation.bracket)
-
-(struct_fields
+(record_struct
   name: (_) @variable.parameter)
 
-(struct_fields
-  type: (_) @type)
-
-(enum_fields
+(record_variant
   name: (_) @variable.parameter)
-
-(enum_fields
-  type: (_) @type)
 
 (field_struct_ctor
   name: (expr_identifier) @variable.parameter)
@@ -51,11 +37,13 @@
   "fn"
   "for"
   "if"
+  "pub"
   "impl"
   "in"
   "let"
   "loop"
   "match"
+  "pub"
   "return"
   "struct"
   "trait"
@@ -65,7 +53,6 @@
   "while"
 ] @keyword
 
-(visibility) @keyword
 (continue) @keyword
 
 ; Literals
@@ -88,10 +75,6 @@
 (keyword_args
   name: (expr_identifier) @variable.parameter)
 
-(binary_expression
-  operator: "."
-  right: (_) @variable.member)
-
 ; Bindings
 
 (pattern (expr_identifier) @variable)
@@ -99,24 +82,26 @@
 (pattern_ctor
   idents: (expr_identifier) @variable)
 
-; Items
+; Types
+
+(type
+  (variable_type
+    (expr_identifier) @type))
+
 
 ; Functions
 
 (fn_signature
   name: (expr_identifier) @function)
 
-(fn_signature
-  return_type: (expr_identifier) @type)
-
 (positional_params
-  parameter_name: (expr_identifier) @variable.parameter
-  parameter_type: (_) @type)
+  parameter_name: (expr_identifier) @variable.parameter)
 
 (keyword_params
   keyword_param_indicator: ":" @variable.parameter
-  parameter_name: (expr_identifier) @variable.parameter
-  parameter_type: (_) @type)
+  parameter_name: (expr_identifier) @variable.parameter)
+
+"self" @variable.parameter.builtin
 
 ; Imports
 
