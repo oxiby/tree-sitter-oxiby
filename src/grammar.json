@@ -1799,6 +1799,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "index"
+        },
+        {
+          "type": "SYMBOL",
           "name": "call"
         },
         {
@@ -3362,6 +3366,39 @@
         }
       ]
     },
+    "index": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "FIELD",
+            "name": "expr",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "["
+          },
+          {
+            "type": "FIELD",
+            "name": "index",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_expression"
+            }
+          },
+          {
+            "type": "STRING",
+            "value": "]"
+          }
+        ]
+      }
+    },
     "unary_expression": {
       "type": "PREC",
       "value": 3,
@@ -3431,6 +3468,10 @@
                 {
                   "type": "STRING",
                   "value": "/"
+                },
+                {
+                  "type": "STRING",
+                  "value": "%"
                 },
                 {
                   "type": "STRING",

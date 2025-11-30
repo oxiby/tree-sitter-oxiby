@@ -261,6 +261,7 @@ module.exports = grammar({
       $.expr_identifier,
 
       // Member access
+      $.index,
 
       // Calls
       $.call,
@@ -546,6 +547,13 @@ module.exports = grammar({
       "}",
     ),
 
+    index: $ => prec(1, seq(
+      field("expr", $._expression),
+      "[",
+      field("index", $._expression),
+      "]",
+    )),
+
     unary_expression: $ => prec(3, seq(
       choice("-", "!"),
       $._expression,
@@ -553,7 +561,7 @@ module.exports = grammar({
 
     binary_expression: $ => prec.left(2, seq(
       field("left", $._expression),
-      field("operator", choice("..=", "..<", "+", "-", "*", "/", "==", "!=", "<", "<=", ">", ">=", ".", "=")),
+      field("operator", choice("..=", "..<", "+", "-", "*", "/", "%", "==", "!=", "<", "<=", ">", ">=", ".", "=")),
       field("right", $._expression),
     )),
 

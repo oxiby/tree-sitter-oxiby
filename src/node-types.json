@@ -119,6 +119,10 @@
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
             "named": true
           },
@@ -174,6 +178,10 @@
         "types": [
           {
             "type": "!=",
+            "named": false
+          },
+          {
+            "type": "%",
             "named": false
           },
           {
@@ -279,6 +287,10 @@
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
             "named": true
           },
@@ -380,6 +392,10 @@
         },
         {
           "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "index",
           "named": true
         },
         {
@@ -503,6 +519,10 @@
         },
         {
           "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "index",
           "named": true
         },
         {
@@ -695,6 +715,10 @@
           "named": true
         },
         {
+          "type": "index",
+          "named": true
+        },
+        {
           "type": "integer",
           "named": true
         },
@@ -878,6 +902,10 @@
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
             "named": true
           },
@@ -1036,6 +1064,10 @@
           "named": true
         },
         {
+          "type": "index",
+          "named": true
+        },
+        {
           "type": "integer",
           "named": true
         },
@@ -1177,6 +1209,10 @@
           "named": true
         },
         {
+          "type": "index",
+          "named": true
+        },
+        {
           "type": "integer",
           "named": true
         },
@@ -1225,6 +1261,216 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "index",
+    "named": true,
+    "fields": {
+      "expr": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "enum_literal",
+            "named": true
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "hash_map",
+            "named": true
+          },
+          {
+            "type": "index",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "let",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "loop",
+            "named": true
+          },
+          {
+            "type": "match",
+            "named": true
+          },
+          {
+            "type": "parenthesized",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_literal",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "while_loop",
+            "named": true
+          }
+        ]
+      },
+      "index": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "binary_expression",
+            "named": true
+          },
+          {
+            "type": "boolean",
+            "named": true
+          },
+          {
+            "type": "break",
+            "named": true
+          },
+          {
+            "type": "call",
+            "named": true
+          },
+          {
+            "type": "conditional",
+            "named": true
+          },
+          {
+            "type": "continue",
+            "named": true
+          },
+          {
+            "type": "enum_literal",
+            "named": true
+          },
+          {
+            "type": "expr_identifier",
+            "named": true
+          },
+          {
+            "type": "float",
+            "named": true
+          },
+          {
+            "type": "for_loop",
+            "named": true
+          },
+          {
+            "type": "hash_map",
+            "named": true
+          },
+          {
+            "type": "index",
+            "named": true
+          },
+          {
+            "type": "integer",
+            "named": true
+          },
+          {
+            "type": "let",
+            "named": true
+          },
+          {
+            "type": "list",
+            "named": true
+          },
+          {
+            "type": "loop",
+            "named": true
+          },
+          {
+            "type": "match",
+            "named": true
+          },
+          {
+            "type": "parenthesized",
+            "named": true
+          },
+          {
+            "type": "return",
+            "named": true
+          },
+          {
+            "type": "string",
+            "named": true
+          },
+          {
+            "type": "struct_literal",
+            "named": true
+          },
+          {
+            "type": "tuple",
+            "named": true
+          },
+          {
+            "type": "unary_expression",
+            "named": true
+          },
+          {
+            "type": "while_loop",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1592,6 +1838,10 @@
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
             "named": true
           },
@@ -1752,6 +2002,10 @@
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
             "named": true
           },
@@ -1853,6 +2107,10 @@
         },
         {
           "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "index",
           "named": true
         },
         {
@@ -1988,6 +2246,10 @@
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
             "named": true
           },
@@ -2089,6 +2351,10 @@
         },
         {
           "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "index",
           "named": true
         },
         {
@@ -2215,6 +2481,10 @@
         },
         {
           "type": "hash_map",
+          "named": true
+        },
+        {
+          "type": "index",
           "named": true
         },
         {
@@ -2477,6 +2747,10 @@
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
             "named": true
           },
@@ -2669,6 +2943,10 @@
           "named": true
         },
         {
+          "type": "index",
+          "named": true
+        },
+        {
           "type": "integer",
           "named": true
         },
@@ -2843,6 +3121,10 @@
           "named": true
         },
         {
+          "type": "index",
+          "named": true
+        },
+        {
           "type": "integer",
           "named": true
         },
@@ -2969,6 +3251,10 @@
           },
           {
             "type": "hash_map",
+            "named": true
+          },
+          {
+            "type": "index",
             "named": true
           },
           {
@@ -3149,6 +3435,10 @@
           "named": true
         },
         {
+          "type": "index",
+          "named": true
+        },
+        {
           "type": "integer",
           "named": true
         },
@@ -3312,6 +3602,10 @@
             "named": true
           },
           {
+            "type": "index",
+            "named": true
+          },
+          {
             "type": "integer",
             "named": true
           },
@@ -3383,6 +3677,10 @@
   },
   {
     "type": "\"",
+    "named": false
+  },
+  {
+    "type": "%",
     "named": false
   },
   {
