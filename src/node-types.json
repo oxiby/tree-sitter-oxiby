@@ -40,10 +40,6 @@
         "named": true
       },
       {
-        "type": "expr_identifier",
-        "named": true
-      },
-      {
         "type": "expression_with_trailing_block",
         "named": true
       },
@@ -100,6 +96,14 @@
         "named": true
       },
       {
+        "type": "scoped_expr_identifier",
+        "named": true
+      },
+      {
+        "type": "scoped_type_identifier",
+        "named": true
+      },
+      {
         "type": "string",
         "named": true
       },
@@ -113,10 +117,6 @@
       },
       {
         "type": "unary",
-        "named": true
-      },
-      {
-        "type": "unit_type",
         "named": true
       },
       {
@@ -411,17 +411,7 @@
         "required": true,
         "types": [
           {
-            "type": "expr_identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "type_identifier",
+            "type": "expression",
             "named": true
           }
         ]
@@ -1175,6 +1165,16 @@
           }
         ]
       },
+      "type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
       "value": {
         "multiple": false,
         "required": true,
@@ -1331,7 +1331,7 @@
           "named": true
         },
         {
-          "type": "pattern_ctor",
+          "type": "pattern_list",
           "named": true
         },
         {
@@ -1339,78 +1339,37 @@
           "named": true
         },
         {
+          "type": "pattern_record_struct",
+          "named": true
+        },
+        {
           "type": "pattern_tuple",
           "named": true
         },
         {
-          "type": "pattern_type",
+          "type": "pattern_tuple_struct",
+          "named": true
+        },
+        {
+          "type": "scoped_type_identifier",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "pattern_ctor",
+    "type": "pattern_list",
     "named": true,
-    "fields": {
-      "idents": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "(",
-            "named": false
-          },
-          {
-            "type": ")",
-            "named": false
-          },
-          {
-            "type": ",",
-            "named": false
-          },
-          {
-            "type": "_",
-            "named": false
-          },
-          {
-            "type": "expr_identifier",
-            "named": true
-          },
-          {
-            "type": "{",
-            "named": false
-          },
-          {
-            "type": "}",
-            "named": false
-          }
-        ]
-      },
-      "parent_type": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": ".",
-            "named": false
-          },
-          {
-            "type": "type_identifier",
-            "named": true
-          }
-        ]
-      },
-      "type": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type_identifier",
-            "named": true
-          }
-        ]
-      }
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "pattern",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1441,12 +1400,48 @@
     }
   },
   {
+    "type": "pattern_record_struct",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "expr_identifier",
+            "named": true
+          }
+        ]
+      },
+      "pattern": {
+        "multiple": true,
+        "required": false,
+        "types": [
+          {
+            "type": "pattern",
+            "named": true
+          }
+        ]
+      },
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "scoped_type_identifier",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "pattern_tuple",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
           "type": "pattern",
@@ -1456,19 +1451,26 @@
     }
   },
   {
-    "type": "pattern_type",
+    "type": "pattern_tuple_struct",
     "named": true,
-    "fields": {},
+    "fields": {
+      "type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "scoped_type_identifier",
+            "named": true
+          }
+        ]
+      }
+    },
     "children": {
       "multiple": true,
-      "required": true,
+      "required": false,
       "types": [
         {
-          "type": "expr_identifier",
-          "named": true
-        },
-        {
-          "type": "type_identifier",
+          "type": "pattern",
           "named": true
         }
       ]
@@ -1614,6 +1616,58 @@
       "types": [
         {
           "type": "expression",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scoped_expr_identifier",
+    "named": true,
+    "fields": {
+      "scope": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "expr_identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "scoped_type_identifier",
+    "named": true,
+    "fields": {
+      "scope": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type_identifier",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "type_identifier",
           "named": true
         }
       ]
@@ -1800,21 +1854,6 @@
       "types": [
         {
           "type": "expression",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "unit_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "type_identifier",
           "named": true
         }
       ]

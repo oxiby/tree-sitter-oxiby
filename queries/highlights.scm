@@ -67,21 +67,22 @@
 ; Expressions
 
 (call
-  name: (expr_identifier) @function)
+  name: (scoped_expr_identifier
+    (expr_identifier) @function.call))
 
-(arguments
-  "(" @punctuation.bracket
-  ")" @punctuation.bracket)
+(call
+  name: (field
+    value: (scoped_expr_identifier
+      (expr_identifier))
+    field: (expr_identifier) @function.call))
 
 (keyword_args
   name: (expr_identifier) @variable.parameter)
 
 ; Bindings
 
-(pattern (expr_identifier) @variable)
-(pattern_type (expr_identifier) @variable)
-(pattern_ctor
-  idents: (expr_identifier) @variable)
+(pattern_record_struct
+  name: (expr_identifier) @variable.parameter)
 
 ; Types
 

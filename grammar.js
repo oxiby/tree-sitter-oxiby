@@ -8,15 +8,14 @@
 // @ts-check
 
 const PREC = {
-  call: 10,
-  field: 9,
-  unary: 8,
-  multiplicative: 7,
-  additive: 6,
-  comparative: 5,
-  and: 4,
-  or: 3,
-  let: 2,
+  call: 9,
+  field: 8,
+  unary: 7,
+  multiplicative: 6,
+  additive: 5,
+  comparative: 4,
+  and: 3,
+  or: 2,
   range: 1,
   assign: 0,
 };
@@ -243,7 +242,19 @@ module.exports = grammar({
       )),
     ),
 
+    expr_identifier: _ => /[a-z_][0-9A-Za-z_]*/,
+
+    scoped_expr_identifier: $ => prec.right(seq(
+      optional(seq(field("scope", $.type_identifier), ".")),
+      $.expr_identifier,
+    )),
+
     type_identifier: _ => /[A-Z][0-9A-Za-z]*/,
+
+    scoped_type_identifier: $ => prec.right(seq(
+      optional(seq(field("scope", $.type_identifier), ".")),
+      $.type_identifier,
+    )),
 
     type: $ => choice(
       $.variable_type,
@@ -292,8 +303,8 @@ module.exports = grammar({
       $.enum_literal,
 
       // Identifiers
-      $.expr_identifier,
-      $.unit_type,
+      $.scoped_expr_identifier,
+      $.scoped_type_identifier,
 
       // Member access
       $.field,
@@ -379,9 +390,6 @@ module.exports = grammar({
       )
     ),
 
-    expr_identifier: _ => /[a-z_][0-9A-Za-z_]*/,
-    unit_type: $ => prec.right(seq(optional(seq($.type_identifier, ".")), $.type_identifier)),
-
     parameters: $ => seq(
       "(",
       optional(choice(
@@ -419,8 +427,7 @@ module.exports = grammar({
     ),
 
     call: $ => prec(2, seq(
-      optional(seq(field("type", $.type_identifier), ".")),
-      field("name", $.expr_identifier),
+      field("name", $.expression),
       field("arguments", $.arguments),
     )),
 
@@ -470,9 +477,10 @@ module.exports = grammar({
       "}",
     ),
 
-    let: $ => prec(PREC.let, seq(
+    let: $ => prec.right(seq(
       "let",
       field("pattern", $.pattern),
+      optional(seq(":", field("type", $.type))),
       "=",
       field("value", $.expression),
     )),
@@ -553,10 +561,12 @@ module.exports = grammar({
 
     pattern: $ => choice(
       $.pattern_literal,
-      $.pattern_type,
       $.expr_identifier,
+      $.scoped_type_identifier,
       $.pattern_tuple,
-      $.pattern_ctor,
+      $.pattern_list,
+      $.pattern_tuple_struct,
+      $.pattern_record_struct,
       "_",
     ),
 
@@ -567,28 +577,51 @@ module.exports = grammar({
       $.string,
     ),
 
-    pattern_type: $ => seq(
-      $.expr_identifier,
-      ":",
-      $.type_identifier,
-    ),
-
     pattern_tuple: $ => seq(
       "(",
-      $.pattern,
-      ",",
-      $.pattern,
       optional(sepBy(",", $.pattern)),
+      optional(","),
       ")",
     ),
 
-    pattern_ctor: $ => prec.left(seq(
+    pattern_list: $ => seq(
+      "[",
+      optional(sepBy(",", $.pattern)),
+      optional(","),
+      "]",
+    ),
+
+    pattern_tuple_struct: $ => seq(
+      field("type", choice(
+        $.scoped_type_identifier,
+      )),
+      "(",
+      sepBy(",", $.pattern),
+      optional(","),
+      ")",
+    ),
+
+    pattern_record_struct: $ => seq(
+      field("type", choice(
+        $.scoped_type_identifier,
+      )),
+      "{",
+      sepBy(",", seq(
+        field("name", $.expr_identifier),
+        ":",
+        field("pattern", $.pattern),
+      )),
+      optional(","),
+      "}",
+    ),
+
+    pattern_struct: $ => prec.left(seq(
       optional(field("parent_type", seq($.type_identifier, "."))),
       field("type", $.type_identifier),
-      optional(field("idents", choice(
+      optional(field("patterns", choice(
         seq("(", "_", ")"),
-        seq("(", sepBy(",", $.expr_identifier), ")"),
-        seq("{", sepBy(",", $.expr_identifier), "}"),
+        seq("(", sepBy(",", $.pattern), ")"),
+        seq("{", sepBy(",", $.pattern), "}"),
       )))),
     ),
 
