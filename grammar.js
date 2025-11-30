@@ -7,7 +7,34 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
+const PREC = {
+  call: 10,
+  field: 9,
+  unary: 8,
+  multiplicative: 7,
+  additive: 6,
+  comparative: 5,
+  and: 4,
+  or: 3,
+  let: 2,
+  range: 1,
+  assign: 0,
+};
+
+/**
+ * @param {RuleOrLiteral} sep
+ * @param {RuleOrLiteral} rule
+ *
+ * @returns {SeqRule}
+ */
 const sepBy1 = (sep, rule) => seq(rule, repeat(seq(sep, rule)));
+
+/**
+ * @param {RuleOrLiteral} sep
+ * @param {RuleOrLiteral} rule
+ *
+ * @returns {ChoiceRule}
+ */
 const sepBy = (sep, rule) => optional(sepBy1(sep, rule));
 
 module.exports = grammar({
@@ -25,7 +52,8 @@ module.exports = grammar({
 
   supertypes: $ => [
     $.item,
-    $.expression
+    $.expression,
+    $.expression_with_trailing_block,
   ],
 
   rules: {
@@ -252,6 +280,7 @@ module.exports = grammar({
       $.float,
       $.integer,
       $.string,
+      $.range,
 
       // Compound primitives
       $.hash_map,
@@ -264,8 +293,10 @@ module.exports = grammar({
 
       // Identifiers
       $.expr_identifier,
+      $.unit_type,
 
       // Member access
+      $.field,
       $.index,
 
       // Calls
@@ -286,9 +317,15 @@ module.exports = grammar({
       $.match,
 
       // Misc.
+      $.assignment,
       $.unary,
       $.binary,
       $.parenthesized,
+      $.expression_with_trailing_block,
+    ),
+
+    expression_with_trailing_block: $ => choice(
+      $.block,
     ),
 
     boolean: _ => choice(
@@ -301,6 +338,13 @@ module.exports = grammar({
     integer: _ => /\d+/,
 
     string: _ => seq('"', /[^"]*/, '"'),
+
+    range: $ => prec.left(PREC.range, seq(
+      optional(field("start", $.expression)),
+      "..",
+      choice("=", "<"),
+      optional(field("end", $.expression)),
+    )),
 
     hash_map: $ => seq(
       "[",
@@ -336,6 +380,7 @@ module.exports = grammar({
     ),
 
     expr_identifier: _ => /[a-z_][0-9A-Za-z_]*/,
+    unit_type: $ => prec.right(seq(optional(seq($.type_identifier, ".")), $.type_identifier)),
 
     parameters: $ => seq(
       "(",
@@ -425,27 +470,41 @@ module.exports = grammar({
       "}",
     ),
 
-    let: $ => seq(
+    let: $ => prec(PREC.let, seq(
       "let",
       field("pattern", $.pattern),
       "=",
       field("value", $.expression),
-    ),
+    )),
 
     match: $ => seq(
       "match",
       field("expr", $.expression),
+      field("body", $.match_body),
+    ),
+
+    match_body: $ => seq(
       "{",
-      field("arms", sepBy1(",", $.match_arm)),
-      optional(","),
+      repeat($.match_arm),
+      alias($.last_match_arm, $.match_arm),
       "}",
     ),
 
-    match_arm: $ => seq(
-      $.pattern,
+    match_arm: $ => prec.right(seq(
+      field("pattern", $.pattern),
       "->",
-      $.expression,
-    ),
+      choice(
+        seq(field("expr", $.expression), ","),
+        field("expr", prec(1, $.expression_with_trailing_block)),
+      ),
+    )),
+
+    last_match_arm: $ => prec.right(seq(
+      field("pattern", $.pattern),
+      "->",
+      field("expr", $.expression),
+      optional(","),
+    )),
 
     break: $ => prec.left(seq(
       "break",
@@ -533,19 +592,12 @@ module.exports = grammar({
       )))),
     ),
 
-    struct_literal: $ => prec.left(seq(
+    struct_literal: $ => seq(
       field("name", $.type_identifier),
-      optional(choice(
-        $.field_struct_literal,
-        $.tuple_struct_literal,
-      )),
-    )),
-
-    field_struct_literal: $ => seq(
       "{",
-      sepBy1(",",
+      sepBy(",",
         seq(
-          field("name", $.expr_identifier),
+          field("field", $.expr_identifier),
           ":",
           field("value", $.expression),
         )
@@ -553,13 +605,6 @@ module.exports = grammar({
       optional(","),
       "}",
     ),
-
-    tuple_struct_literal: $ => prec(2, seq(
-      "(",
-      sepBy1(",", field("value", $.expression)),
-      optional(","),
-      ")",
-    )),
 
     enum_literal: $ => prec(2, seq(
       field("type", $.type_identifier),
@@ -573,23 +618,47 @@ module.exports = grammar({
       "}",
     ),
 
-    index: $ => prec(1, seq(
+    field: $ => prec(PREC.field, seq(
+      field("value", $.expression),
+      ".",
+      field("field", choice($.expr_identifier, $.integer)),
+    )),
+
+    index: $ => prec(PREC.call, seq(
       field("expr", $.expression),
       "[",
       field("index", $.expression),
       "]",
     )),
 
-    unary: $ => prec(3, seq(
+    assignment: $ => prec.left(PREC.assign, seq(
+      field("lhs", $.expression),
+      "=",
+      field("right", $.expression),
+    )),
+
+    unary: $ => prec(PREC.unary, seq(
       choice("-", "!"),
       $.expression,
     )),
 
-    binary: $ => prec.left(2, seq(
-      field("left", $.expression),
-      field("operator", choice("..=", "..<", "+", "-", "*", "/", "%", "==", "!=", "<", "<=", ">", ">=", ".", "=")),
-      field("right", $.expression),
-    )),
+    binary: $ => {
+      const table = [
+        [PREC.and, "&&"],
+        [PREC.or, "||"],
+        [PREC.comparative, choice("==", "!=", "<", "<=", ">", ">=")],
+        [PREC.additive, choice("+", "-")],
+        [PREC.multiplicative, choice("*", "/", "%")],
+      ];
+
+      // @ts-ignore
+      return choice(...table.map(([precedence, operator]) => prec.left(precedence, seq(
+        field("lhs", $.expression),
+        // @ts-ignore
+        field("operator", operator),
+        field("rhs", $.expression),
+      ))));
+    },
 
     parenthesized: $ => seq("(", $.expression, ")"),
   }
