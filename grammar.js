@@ -23,15 +23,20 @@ module.exports = grammar({
     [$.positional_args],
   ],
 
+  supertypes: $ => [
+    $.item,
+    $.expression
+  ],
+
   rules: {
-    source_file: $ => repeat($._item),
+    source_file: $ => repeat($.item),
 
     comment: _ => seq(
       "//",
       /.*/,
     ),
 
-    _item: $ => choice(
+    item: $ => choice(
       $.item_enum,
       $.item_fn,
       $.item_impl,
@@ -241,7 +246,7 @@ module.exports = grammar({
       field("type_parameters", optional($.type_params)),
     ),
 
-    _expression: $ => choice(
+    expression: $ => choice(
       // Literals
       $.boolean,
       $.float,
@@ -281,8 +286,8 @@ module.exports = grammar({
       $.match,
 
       // Misc.
-      $.unary_expression,
-      $.binary_expression,
+      $.unary,
+      $.binary,
       $.parenthesized,
     ),
 
@@ -301,9 +306,9 @@ module.exports = grammar({
       "[",
         sepBy1(",",
           seq(
-            $._expression,
+            $.expression,
             ":",
-            $._expression,
+            $.expression,
           ),
         ),
         optional(","),
@@ -312,19 +317,19 @@ module.exports = grammar({
 
     list: $ => seq(
       "[",
-      sepBy(",", $._expression),
+      sepBy(",", $.expression),
       optional(","),
       "]",
     ),
 
     tuple: $ => choice(
       seq("(", ")"),
-      seq("(", $._expression, ",", ")"),
+      seq("(", $.expression, ",", ")"),
       seq(
         "(",
-          $._expression,
+          $.expression,
           ",",
-          sepBy1(",", $._expression),
+          sepBy1(",", $.expression),
           optional(","),
         ")",
       )
@@ -389,14 +394,14 @@ module.exports = grammar({
     ),
 
     positional_args: $ => sepBy1(",",
-      field("expression", $._expression),
+      field("expression", $.expression),
     ),
 
     keyword_args: $ => sepBy1(",",
       seq(
         field("name", $.expr_identifier),
         ":",
-        field("expr", $._expression),
+        field("expr", $.expression),
       ),
     ),
 
@@ -416,7 +421,7 @@ module.exports = grammar({
         field("return_type", $.type),
       )),
       "{",
-      field("body", repeat($._expression)),
+      field("body", repeat($.expression)),
       "}",
     ),
 
@@ -424,12 +429,12 @@ module.exports = grammar({
       "let",
       field("pattern", $.pattern),
       "=",
-      field("value", $._expression),
+      field("value", $.expression),
     ),
 
     match: $ => seq(
       "match",
-      field("expr", $._expression),
+      field("expr", $.expression),
       "{",
       field("arms", sepBy1(",", $.match_arm)),
       optional(","),
@@ -439,17 +444,17 @@ module.exports = grammar({
     match_arm: $ => seq(
       $.pattern,
       "->",
-      $._expression,
+      $.expression,
     ),
 
     break: $ => prec.left(seq(
       "break",
-      optional($._expression),
+      optional($.expression),
     )),
 
     conditional: $ => seq(
       "if",
-      $._expression,
+      $.expression,
       $.block,
       optional(
         seq(
@@ -467,7 +472,7 @@ module.exports = grammar({
       "for",
       $.pattern,
       "in",
-      $._expression,
+      $.expression,
       $.block,
     ),
 
@@ -478,12 +483,12 @@ module.exports = grammar({
 
     return: $ => prec.left(seq(
       "return",
-      optional($._expression),
+      optional($.expression),
     )),
 
     while_loop: $ => seq(
       "while",
-      field("predicate", $._expression),
+      field("predicate", $.expression),
       $.block,
     ),
 
@@ -542,7 +547,7 @@ module.exports = grammar({
         seq(
           field("name", $.expr_identifier),
           ":",
-          field("value", $._expression),
+          field("value", $.expression),
         )
       ),
       optional(","),
@@ -551,7 +556,7 @@ module.exports = grammar({
 
     tuple_struct_literal: $ => prec(2, seq(
       "(",
-      sepBy1(",", field("value", $._expression)),
+      sepBy1(",", field("value", $.expression)),
       optional(","),
       ")",
     )),
@@ -564,28 +569,28 @@ module.exports = grammar({
 
     block: $ => seq(
       "{",
-      repeat($._expression),
+      repeat($.expression),
       "}",
     ),
 
     index: $ => prec(1, seq(
-      field("expr", $._expression),
+      field("expr", $.expression),
       "[",
-      field("index", $._expression),
+      field("index", $.expression),
       "]",
     )),
 
-    unary_expression: $ => prec(3, seq(
+    unary: $ => prec(3, seq(
       choice("-", "!"),
-      $._expression,
+      $.expression,
     )),
 
-    binary_expression: $ => prec.left(2, seq(
-      field("left", $._expression),
+    binary: $ => prec.left(2, seq(
+      field("left", $.expression),
       field("operator", choice("..=", "..<", "+", "-", "*", "/", "%", "==", "!=", "<", "<=", ">", ">=", ".", "=")),
-      field("right", $._expression),
+      field("right", $.expression),
     )),
 
-    parenthesized: $ => seq("(", $._expression, ")"),
+    parenthesized: $ => seq("(", $.expression, ")"),
   }
 });
