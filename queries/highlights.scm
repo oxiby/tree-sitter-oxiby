@@ -32,6 +32,7 @@
 
 [
   "->"
+  "^"
   "break"
   "else"
   "enum"
@@ -55,6 +56,31 @@
 ] @keyword
 
 (continue) @keyword
+
+; Operators
+
+[
+  "..="
+  "..<"
+  "&&"
+  "||"
+  "=="
+  "!="
+  "<"
+  "<="
+  ">"
+  ">="
+  "+"
+  "-"
+  "*"
+  "/"
+  "%"
+  "+="
+  "-="
+  "*="
+  "/"
+  "="
+] @operator
 
 ; Literals
 
@@ -83,6 +109,9 @@
 
 (pattern_record_struct
   name: (expr_identifier) @variable.parameter)
+
+(pattern_record_struct
+  rename: (expr_identifier) @variable.parameter)
 
 ; Types
 

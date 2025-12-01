@@ -204,7 +204,7 @@ module.exports = grammar({
 
     constraint: $ => seq(
       field("type", $.type),
-      optional(field("bounds", seq(":", $.bounds))),
+      optional(field("bounds", seq("^", $.bounds))),
       optional(field("default", seq("=", $.type))),
     ),
 
@@ -213,7 +213,7 @@ module.exports = grammar({
     associated_type: $ => seq(
       "type",
       field("name", $.type_identifier),
-      optional(field("bounds", seq(":", sepBy1(",", $.bounds)))),
+      optional(field("bounds", seq("^", sepBy1(",", $.bounds)))),
       optional(field("default", seq("=", $.type))),
     ),
 
@@ -352,8 +352,7 @@ module.exports = grammar({
 
     range: $ => prec.left(PREC.range, seq(
       optional(field("start", $.expression)),
-      "..",
-      choice("=", "<"),
+      choice("..=", "..<"),
       optional(field("end", $.expression)),
     )),
 
@@ -362,7 +361,7 @@ module.exports = grammar({
         sepBy1(",",
           seq(
             $.expression,
-            ":",
+            "=",
             $.expression,
           ),
         ),
@@ -452,7 +451,7 @@ module.exports = grammar({
     keyword_args: $ => sepBy1(",",
       seq(
         field("name", $.expr_identifier),
-        ":",
+        "=",
         field("expr", $.expression),
       ),
     ),
@@ -480,7 +479,6 @@ module.exports = grammar({
     let: $ => prec.right(seq(
       "let",
       field("pattern", $.pattern),
-      optional(seq(":", field("type", $.type))),
       "=",
       field("value", $.expression),
     )),
@@ -608,8 +606,8 @@ module.exports = grammar({
       "{",
       sepBy(",", seq(
         field("name", $.expr_identifier),
-        ":",
-        field("pattern", $.pattern),
+        optional(seq("->", field("rename", $.expr_identifier))),
+        optional(seq("=", field("pattern", $.pattern))),
       )),
       optional(","),
       "}",
@@ -631,7 +629,7 @@ module.exports = grammar({
       sepBy(",",
         seq(
           field("field", $.expr_identifier),
-          ":",
+          "=",
           field("value", $.expression),
         )
       ),
@@ -666,7 +664,7 @@ module.exports = grammar({
 
     assignment: $ => prec.left(PREC.assign, seq(
       field("lhs", $.expression),
-      "=",
+      field("operator", choice("=", "+=", "-=", "*=", "/=")),
       field("right", $.expression),
     )),
 
