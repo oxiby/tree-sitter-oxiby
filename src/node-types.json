@@ -174,11 +174,11 @@
       "required": false,
       "types": [
         {
-          "type": "keyword_args",
+          "type": "keyword_arg",
           "named": true
         },
         {
-          "type": "positional_args",
+          "type": "positional_arg",
           "named": true
         }
       ]
@@ -1116,11 +1116,11 @@
     }
   },
   {
-    "type": "keyword_args",
+    "type": "keyword_arg",
     "named": true,
     "fields": {
       "expr": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
@@ -1130,7 +1130,7 @@
         ]
       },
       "name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
@@ -1142,11 +1142,11 @@
     }
   },
   {
-    "type": "keyword_params",
+    "type": "keyword_param",
     "named": true,
     "fields": {
       "keyword_param_indicator": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
@@ -1156,7 +1156,7 @@
         ]
       },
       "parameter_name": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
@@ -1166,7 +1166,7 @@
         ]
       },
       "parameter_type": {
-        "multiple": true,
+        "multiple": false,
         "required": true,
         "types": [
           {
@@ -1309,11 +1309,11 @@
       "required": false,
       "types": [
         {
-          "type": "keyword_params",
+          "type": "keyword_param",
           "named": true
         },
         {
-          "type": "positional_params",
+          "type": "positional_param",
           "named": true
         }
       ]
@@ -1503,11 +1503,11 @@
     }
   },
   {
-    "type": "positional_args",
+    "type": "positional_arg",
     "named": true,
     "fields": {
-      "expression": {
-        "multiple": true,
+      "expr": {
+        "multiple": false,
         "required": true,
         "types": [
           {
@@ -1519,11 +1519,11 @@
     }
   },
   {
-    "type": "positional_params",
+    "type": "positional_param",
     "named": true,
     "fields": {
       "parameter_name": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {
@@ -1533,7 +1533,7 @@
         ]
       },
       "parameter_type": {
-        "multiple": true,
+        "multiple": false,
         "required": false,
         "types": [
           {

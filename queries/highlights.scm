@@ -102,7 +102,7 @@
       (expr_identifier))
     field: (expr_identifier) @function.call))
 
-(keyword_args
+(keyword_arg
   name: (expr_identifier) @variable.parameter)
 
 ; Bindings
@@ -125,10 +125,10 @@
 (fn_signature
   name: (expr_identifier) @function)
 
-(positional_params
+(positional_param
   parameter_name: (expr_identifier) @variable.parameter)
 
-(keyword_params
+(keyword_param
   keyword_param_indicator: ":" @variable.parameter
   parameter_name: (expr_identifier) @variable.parameter)
 

@@ -44,11 +44,6 @@ module.exports = grammar({
     $.comment,
   ],
 
-  conflicts: $ => [
-    [$.positional_params],
-    [$.positional_args],
-  ],
-
   supertypes: $ => [
     $.item,
     $.expression,
@@ -391,34 +386,26 @@ module.exports = grammar({
 
     parameters: $ => seq(
       "(",
-      optional(choice(
-        seq(
-          $.positional_params,
-          ",",
-          $.keyword_params,
-        ),
-        $.keyword_params,
-        $.positional_params,
-      )),
+      optional(sepBy1(",", choice(
+        $.keyword_param,
+        $.positional_param,
+      ))),
+      optional(","),
       ")",
     ),
 
     self: _ => "self",
 
-    positional_params: $ => sepBy1(",",
-      choice(
-        "self",
-        seq(
-          field("parameter_name", $.expr_identifier),
-          ":",
-          field("parameter_type", $.type),
-        ),
-      ),
+    keyword_param: $ => seq(
+      field("keyword_param_indicator", ":"),
+      field("parameter_name", $.expr_identifier),
+      ":",
+      field("parameter_type", $.type),
     ),
 
-    keyword_params: $ => sepBy1(",",
+    positional_param: $ => choice(
+      "self",
       seq(
-        field("keyword_param_indicator", ":"),
         field("parameter_name", $.expr_identifier),
         ":",
         field("parameter_type", $.type),
@@ -432,29 +419,21 @@ module.exports = grammar({
 
     arguments: $ => seq(
       "(",
-      optional(choice(
-        seq(
-          $.positional_args,
-          ",",
-          $.keyword_args,
-        ),
-        $.keyword_args,
-        $.positional_args,
-      )),
+      optional(sepBy1(",", choice(
+        $.keyword_arg,
+        $.positional_arg,
+      ))),
+      optional(","),
       ")",
     ),
 
-    positional_args: $ => sepBy1(",",
-      field("expression", $.expression),
+    keyword_arg: $ => seq(
+      field("name", $.expr_identifier),
+      "=",
+      field("expr", $.expression),
     ),
 
-    keyword_args: $ => sepBy1(",",
-      seq(
-        field("name", $.expr_identifier),
-        "=",
-        field("expr", $.expression),
-      ),
-    ),
+    positional_arg: $ => field("expr", $.expression),
 
     closure: $ => seq(
       "fn",
