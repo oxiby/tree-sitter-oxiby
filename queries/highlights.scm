@@ -119,6 +119,9 @@
   (variable_type
     (expr_identifier) @type))
 
+(associated_type
+  name: (expr_identifier) @type)
+
 
 ; Functions
 

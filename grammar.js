@@ -207,7 +207,7 @@ module.exports = grammar({
 
     associated_type: $ => seq(
       "type",
-      field("name", $.type_identifier),
+      field("name", $.expr_identifier),
       optional(field("bounds", seq("^", sepBy1(",", $.bounds)))),
       optional(field("default", seq("=", $.type))),
     ),

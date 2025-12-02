@@ -1247,7 +1247,7 @@
           "name": "name",
           "content": {
             "type": "SYMBOL",
-            "name": "type_identifier"
+            "name": "expr_identifier"
           }
         },
         {
