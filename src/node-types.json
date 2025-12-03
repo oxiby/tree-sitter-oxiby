@@ -249,12 +249,12 @@
             "named": false
           },
           {
-            "type": "^",
-            "named": false
-          },
-          {
             "type": "bounds",
             "named": true
+          },
+          {
+            "type": "is",
+            "named": false
           }
         ]
       },
@@ -564,12 +564,12 @@
         "required": false,
         "types": [
           {
-            "type": "^",
-            "named": false
-          },
-          {
             "type": "bounds",
             "named": true
+          },
+          {
+            "type": "is",
+            "named": false
           }
         ]
       },
@@ -2096,10 +2096,6 @@
     "named": false
   },
   {
-    "type": "^",
-    "named": false
-  },
-  {
     "type": "_",
     "named": false
   },
@@ -2154,6 +2150,10 @@
   {
     "type": "integer",
     "named": true
+  },
+  {
+    "type": "is",
+    "named": false
   },
   {
     "type": "let",

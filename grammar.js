@@ -199,7 +199,7 @@ module.exports = grammar({
 
     constraint: $ => seq(
       field("type", $.type),
-      optional(field("bounds", seq("^", $.bounds))),
+      optional(field("bounds", seq("is", $.bounds))),
       optional(field("default", seq("=", $.type))),
     ),
 
@@ -208,7 +208,7 @@ module.exports = grammar({
     associated_type: $ => seq(
       "type",
       field("name", $.expr_identifier),
-      optional(field("bounds", seq("^", sepBy1(",", $.bounds)))),
+      optional(field("bounds", seq("is", sepBy1(",", $.bounds)))),
       optional(field("default", seq("=", $.type))),
     ),
 

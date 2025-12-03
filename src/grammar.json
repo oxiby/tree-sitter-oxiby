@@ -1169,7 +1169,7 @@
                 "members": [
                   {
                     "type": "STRING",
-                    "value": "^"
+                    "value": "is"
                   },
                   {
                     "type": "SYMBOL",
@@ -1261,7 +1261,7 @@
                 "members": [
                   {
                     "type": "STRING",
-                    "value": "^"
+                    "value": "is"
                   },
                   {
                     "type": "SEQ",
